@@ -1,0 +1,52 @@
+.home{
+    margin-top: 149px;
+}
+
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text, .buttons {
+    margin-top: 135px;
+}
+
+.child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 200;
+    color: #9C9C9C;
+  }
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.purple, .orange, .white {
+    border: none;
+    font-size: 18px;
+    padding: 15px 29px;
+    border-radius: 50px;
+}
+
+.purple, .orange{
+    color: white;
+}
+
+.purple {
+    background-color: #3D199B;
+}
+
+.orange {
+    background-color: #F79C78;
+}
+
+.white{
+    color: #3D199B;
+    background-color: white;
+}
