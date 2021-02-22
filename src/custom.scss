@@ -1,0 +1,20 @@
+// Override default variables before the import
+// $body-bg: #000;
+
+$cityride-darkpurple: #3D199B;
+$cityride-orange: #F79C78;
+$cityride-light: #fff;
+$enable-responsive-font-sizes: true;
+
+// Import Bootstrap and its default variables
+$primary:       $cityride-darkpurple;
+$secondary:     $cityride-orange;
+// $success:       $green !default;
+// $info:          $cyan !default;
+// $warning:       $yellow !default;
+// $danger:        $red !default;
+$light:         $cityride-light;
+// $dark:          $gray-900 !default;
+
+
+@import '~bootstrap/scss/bootstrap.scss';

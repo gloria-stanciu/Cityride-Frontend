@@ -1,0 +1,58 @@
+.home{
+    margin-top: 149px;
+}
+
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 200;
+    color: #9C9C9C;
+  }
+
+.purple, .orange{
+    color: white;
+}
+
+.accountButton{
+    width: 250px;
+}
+
+// @media only screen and (min-width: 33.9em) { 
+// 	.btn {
+//         background-color: indigo;
+//     }
+// }
+
+
+
+@media (max-width: 575.98px) { 
+    .child{
+        font-size: 0.85rem;
+    }
+    .image{
+        max-width: 70px
+    }
+    .container{
+        padding: 4rem;
+    }
+}
+
+@media (min-width: 575.98px) { 
+    .child{
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .child{
+        font-size: 2.25rem;
+    }
+} 
