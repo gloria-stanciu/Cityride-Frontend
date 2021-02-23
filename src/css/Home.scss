@@ -1,7 +1,3 @@
-.home{
-    margin-top: 149px;
-}
-
 .image{
     display: block;
     margin-left: auto;
@@ -17,42 +13,195 @@
     color: #9C9C9C;
   }
 
-.purple, .orange{
-    color: white;
+.description2, .description3{
+    font-weight: 200;
+    color: #525252;
 }
 
-.accountButton{
-    width: 250px;
-}
-
-// @media only screen and (min-width: 33.9em) { 
-// 	.btn {
-//         background-color: indigo;
-//     }
-// }
-
-
-
-@media (max-width: 575.98px) { 
-    .child{
-        font-size: 0.85rem;
+@media (max-width: 575.98px) {
+    .text{
+        margin-top: 5rem;
     }
-    .image{
-        max-width: 70px
+    .child{
+        font-size: 0.8rem;
     }
     .container{
         padding: 4rem;
     }
-}
+    .btn-responsive {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+      }
+    .image{
+        max-width: 70px;
+    }
+    .description2{
+        font-size: 1.2rem;
+    }
+    .description3{
+        font-size: 1rem;
+    }
+    .page1{
+        margin: 8rem auto;
+    }
+    .page2{
+        margin: 8rem auto;
+    }
+    .page3{
+        margin: 12rem auto;
+    }
+    .page4{
+        margin: 10rem auto;
+    }
+ }
 
-@media (min-width: 575.98px) { 
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .text{
+        margin-top: 6rem;
+    }
     .child{
+        font-size: 1.2rem;
+    }
+    .container{
+        padding: 4rem;
+    }
+    .btn-responsive {
+        font-size: 1rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1rem;
+      }
+    .image{
+        max-width: 90px;
+    }
+    .description2{
         font-size: 1.5rem;
     }
-}
-
-@media (min-width: 1200px) {
-    .child{
-        font-size: 2.25rem;
+    .description3{
+        font-size: 1.2rem;
     }
-} 
+    .page1{
+        margin: 8rem auto;
+    }
+    .page2{
+        margin: 8rem auto;
+    }
+    .page3{
+        margin: 12rem auto;
+    }
+    .page4{
+        margin: 10rem auto;
+    }
+ }
+
+// // Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .text{
+        margin-top: 6rem;
+    }
+    .child{
+        font-size: 1.8rem;
+    }
+    .container{
+        padding: 4rem;
+    }
+    .btn-responsive {
+        font-size: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.8rem;
+    }
+    .image{
+        max-width: 100px;
+    }
+    .description2{
+        font-size: 2rem;
+    }
+    .description3{
+        font-size: 1.5rem;
+    }
+    .page1{
+        margin: 4rem auto;
+    }
+    .page2{
+        margin: 15rem auto;
+    }
+    .page3{
+        margin: 15.5rem auto;
+    }
+    .page4{
+        margin: 15rem auto;
+    }
+ }
+
+// // Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .text{
+        margin-top: 6rem;
+    }
+    .child{
+        font-size: 1.8rem;
+    }
+    .container{
+        padding: 4rem;
+    }
+    .btn-responsive {
+        font-size: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.8rem;
+    }
+    .description2{
+        font-size: 2.5rem;
+    }
+    .description3{
+        font-size: 2rem;
+    }
+    .page1{
+        margin: 4rem auto;
+    }
+    .page2{
+        margin: 12rem auto;
+    }
+    .page3{
+        margin: 15.5rem auto;
+    }
+    .page4{
+        margin: 14rem auto;
+    }
+ }
+
+// // Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+    .text{
+        margin-top: 7rem;
+    }
+    .child{
+        font-size: 1.8rem;
+    }
+    .container{
+        padding: 4rem;
+    }
+    .btn-responsive {
+        font-size: 1.2rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.8rem;
+    }
+    .description2{
+        font-size: 3rem;
+    }
+    .description3{
+        font-size: 2.5rem;
+    }
+    .page1{
+        margin: 8rem auto;
+    }
+    .page2{
+        margin: 8rem auto;
+    }
+    .page3{
+        margin: 14.5rem auto;
+    }
+    .page4{
+        margin: 14rem auto;
+    }
+ }

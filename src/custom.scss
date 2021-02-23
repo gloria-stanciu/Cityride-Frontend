@@ -5,6 +5,7 @@ $cityride-darkpurple: #3D199B;
 $cityride-orange: #F79C78;
 $cityride-light: #fff;
 $enable-responsive-font-sizes: true;
+$grey-dark: #525252;
 
 // Import Bootstrap and its default variables
 $primary:       $cityride-darkpurple;
@@ -15,6 +16,10 @@ $secondary:     $cityride-orange;
 // $danger:        $red !default;
 $light:         $cityride-light;
 // $dark:          $gray-900 !default;
+$purple: #4B37A4;
+$purple-400: $cityride-darkpurple;
+$purple-600: #5C4FB3;
+$purple-700: #8F97E0;
 
 
 @import '~bootstrap/scss/bootstrap.scss';
