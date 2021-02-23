@@ -1,8 +1,9 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 import './css/App.css';
 import Home from './components/Home';
+import LogIn from './components/LogIn';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <div>
           {/* <Navigator/> */}
           <Switch>
-            <Route path ='/' component = {Home} exact/>
+            <Route exact path ='/' component = {Home}/>
+            <Route path="/logIn" component={LogIn} />
           </Switch>
         </div>
       </BrowserRouter>

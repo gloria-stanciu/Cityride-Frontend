@@ -1,21 +1,25 @@
 import React from 'react';
 
-import destination_boy from '../images/destination_boy.png'
-import '../css/Home.scss';
+import '../css/Home.css';
 import Button from './Button'
 
+import {useHistory} from 'react-router-dom';
+
 function Home(){
+    const history = useHistory();
     return (
         <div>
             <div className="page1 w-100 h-100">
                 <img src='/images/app_name.png' alt="app name" className='image'/>
-                <div className='text'>
+                <div className='text text-center'>
                     <div className='child'>Wait no more!</div>
                     <div className='child'>Track your public transport and be in sync with it!</div>
                 </div>
                 <div className='container col-lg-5 col-md-12 mt-5'>
                     <div className = 'accountButtons row'>
-                        <Button className='btn btn-responsive btn-primary purple col-lg-6' name="Log in"></Button>
+                        <Button className='btn btn-responsive btn-primary purple col-lg-6' name="Log in" onClick={()=>{
+                            history.push('/logIn')
+                        }}></Button>
                         <Button className='btn btn-responsive btn-secondary orange col-lg-6' name="Create account"></Button>
                     </div>
                     <div className = 'row'>
