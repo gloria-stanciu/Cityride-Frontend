@@ -54,7 +54,9 @@ function PageOne(){
                     <Button className='btn btn-responsive btn-primary purple col-lg-6' name="Log in" onClick={()=>{
                         history.push('/login')
                     }}></Button>
-                    <Button className='btn btn-responsive btn-secondary orange col-lg-6' name="Create account"></Button>
+                    <Button className='btn btn-responsive btn-secondary orange col-lg-6' name="Create account" onClick={()=>{
+                        history.push('/signup')
+                    }}></Button>
                 </div>
                 <div className = 'row'>
                     <Button className='btn btn-responsive btn-light white col-lg' name="Continue without account"></Button>

@@ -1,9 +1,9 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import './css/App.css';
-// import Home from './components/Home';
 import LogIn from './components/LogIn';
+import CreateAccount from './components/CreateAccount';
 import MobileHome from './components/MobileHome';
 import DesktopHome from './components/DesktopHome';
 
@@ -22,11 +22,10 @@ function App() {
     <div className='app'>
       <BrowserRouter>
         <div>
-          {/* <Navigator/> */}
           <Switch>
             <Route exact path ='/' component = {checkDevice()}/>
             <Route path="/login" component={LogIn} />
-            {/* <Redirect to="/"/> */}
+            <Route path="/signup" component={CreateAccount} />
           </Switch>
         </div>
       </BrowserRouter>
