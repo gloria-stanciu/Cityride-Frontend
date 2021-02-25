@@ -17,7 +17,6 @@
     font-weight: 200;
     color: #525252;
 }
-
 @media (max-width: 575.98px) {
     .text{
         margin-top: 5rem;
@@ -26,7 +25,12 @@
         font-size: 0.8rem;
     }
     .container{
-        padding: 4rem;
+        padding: 1rem;
+    }
+    .deviceDisplay{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     .btn-responsive {
         font-size: 0.8rem;
@@ -42,22 +46,16 @@
     .description3{
         font-size: 1rem;
     }
-    .page1{
-        margin: 8rem auto;
-    }
-    .page2{
-        margin: 8rem auto;
-    }
-    .page3{
-        margin: 12rem auto;
-    }
-    .page4{
-        margin: 10rem auto;
+    .page2, .page3, .page4{
+        position: fixed; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
  }
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) { 
+@media (min-width: 600px) and (max-width: 767.98px) { 
     .text{
         margin-top: 6rem;
     }
@@ -205,3 +203,12 @@
         margin: 14rem auto;
     }
  }
+
+ @media screen and (min-width: 575.98px) {
+    .desktop {
+      display: block;
+    }
+    .mobile {
+      display: hidden;
+    }
+  } 
