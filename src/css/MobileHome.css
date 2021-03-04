@@ -11,6 +11,10 @@
   background-color: #8F97E0;
 }
 
+.orange{
+  color: white;
+}
+
 .slides{
   border-radius: 9999px;
   padding: 0;
@@ -35,9 +39,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  .child{
-    font-size: 1rem;
   }
 }
 

@@ -1,14 +1,17 @@
+.parentDiv{
+    min-height: 100vh;
+}
 .btn{
     border: none;
 }
 .logo{
     max-width: 70px;
 }
-
 .form-control{
     border-radius: 50px;
-    padding: rem auto;
     border: none;
+    color: #3D199B;
+    font-weight: 200;
 }
 .form-control::placeholder, .form-check-label{
     font-weight: 100;
@@ -16,29 +19,10 @@
 .form-check-label {
     text-align:left!important;
 }
-
-.form-control {
-    color: #3D199B;
-    font-weight: 200;
-} 
-
-.orange{
-    color: white;
-}
-
-@media screen and (min-width: 600px) {
-    .desktop {
-      display: block;
-    }
-    .mobile {
-      display: hidden;
-    }
-  } 
-
-@media (max-width: 575.98px) {
+@media (max-width: 600px) {
     .descriptionTitle{
         font-size: 1.5rem;
-        margin-top: 10rem;
+        /* margin-top: 10rem; */
         color: #525252;
         font-weight: 200;
     }
@@ -56,7 +40,7 @@
 }
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 500) and (max-width: 767.98px) { 
+@media (min-width: 600px) and (max-width: 767.98px) { 
     .descriptionTitle{
         font-size: 2rem;
         margin-top: 7rem;

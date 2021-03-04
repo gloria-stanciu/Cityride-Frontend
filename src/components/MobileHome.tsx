@@ -49,7 +49,7 @@ function PageOne(){
                 <div className='child'>Wait no more!</div>
                 <div className='child'>Track your public transport and be in sync with it!</div>
             </div>
-            <div className='container col-lg-5 col-md-12'>
+            <div className='container col-lg-5 col-md-12 mt-5'>
                 <div className = 'accountButtons row'>
                     <Button className='btn btn-responsive btn-primary purple col-lg-6' name="Log in" onClick={()=>{
                         history.push('/login')

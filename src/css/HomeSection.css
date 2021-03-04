@@ -4,7 +4,7 @@
     flex-wrap: wrap;
 }
 
-@media (max-width: 575.98px) {
+/* @media (max-width: 575.98px) {
     .text{
         margin-top: 5rem;
     }
@@ -39,10 +39,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
- }
+ } */
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 600px) and (max-width: 767.98px) { 
+/* @media (min-width: 600px) and (max-width: 767.98px) { 
     .text{
         margin-top: 6rem;
     }
@@ -78,10 +78,10 @@
     .page4{
         margin: 10rem auto;
     }
- }
+ } */
 
 /* // // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) { 
+/* @media (min-width: 768px) and (max-width: 991.98px) { 
     .text{
         margin-top: 6rem;
     }
@@ -117,10 +117,10 @@
     .page4{
         margin: 15rem auto;
     }
- }
+ } */
 
 /* // // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) { 
+/* @media (min-width: 992px) and (max-width: 1199.98px) { 
     .text{
         margin-top: 6rem;
     }
@@ -145,18 +145,18 @@
         margin: 4rem auto;
     }
     .page2{
-        margin: 12rem auto;
+        margin: 8rem auto;
     }
     .page3{
-        margin: 15.5rem auto;
+        margin: 8rem auto;
     }
     .page4{
-        margin: 14rem auto;
+        margin: 8rem auto 0 rem;
     }
- }
+ } */
 
 /* // // Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
+/* @media (min-width: 1200px) { 
     .text{
         margin-top: 7rem;
     }
@@ -184,9 +184,9 @@
         margin: 8rem auto;
     }
     .page3{
-        margin: 14.5rem auto;
+        margin: 8rem auto;
     }
     .page4{
-        margin: 14rem auto;
-    }
- }
+        margin: 8rem auto 2rem;
+    } */
+ /* } */

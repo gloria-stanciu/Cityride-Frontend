@@ -1,3 +1,6 @@
+.parentDiv{
+    min-height: 100vh;
+}
 .btn{
     border: none;
 }
@@ -7,7 +10,6 @@
 
 .form-control{
     border-radius: 50px;
-    padding: rem auto;
     border: none;
 }
 .form-control::placeholder, .form-check-label{
@@ -19,22 +21,36 @@
     font-weight: 200;
 } 
 
-.orange{
-    color: white;
-}
-.all{
-}
-@media (max-width: 600px) {
+@media (max-width: 350px) {
     .descriptionTitle{
-        font-size: 1.5rem;
-        margin: 2rem auto;
+        font-size: 1rem;
+    }
+    .form-control::placeholder, .form-check-label{
+        font-size: 0.7rem;
+    }
+    .btn-responsive {
+        font-size: 0.7rem;
+    }
+    .form-control-responsive{
+        font-size: 0.8rem;
+    }
+    .logo{
+        max-width: 30px;
+    }
+}
+
+@media (min-width:350) and (max-width: 600px) {
+    .descriptionTitle{
+        font-size: 1rem;
+        margin: 1rem auto;
         color: #525252;
         font-weight: 200;
     }
+    .form-control::placeholder, .form-check-label{
+        font-size: 0.6rem;
+    }
     .btn-responsive {
-        font-size: 0.8rem;
-        padding: 0.8rem 0.5rem;
-        margin-bottom: 1.8rem;
+        font-size: 0.6rem;
     }
     .logo{
         max-width: 40px;
@@ -48,14 +64,11 @@
 @media (min-width: 600px) and (max-width: 767.98px) { 
     .descriptionTitle{
         font-size: 2rem;
-        margin: 3.5rem auto 2.5rem;
         color: #525252;
         font-weight: 200;
     }
     .btn-responsive {
         font-size: 0.8rem;
-        padding: 0.8rem 0.5rem;
-        margin-bottom: 1.8rem;
     }
     .form-control-responsive{
         font-size: 0.8rem;
@@ -66,14 +79,17 @@
 @media (min-width: 768px) and (max-width: 991.98px) { 
     .descriptionTitle{
         font-size: 1.8rem;
-        margin-top: 3rem;
         color: #525252;
         font-weight: 200;
     }
     .btn-responsive {
+        font-size: 0.8rem;
+    }
+    .form-control::placeholder, .form-check-label{
         font-size: 1rem;
-        padding: 1rem 1.2rem;
-        margin-bottom: 1.8rem;
+    }
+    .logo{
+        max-width: 40px;
     }
 }
 

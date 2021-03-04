@@ -1,3 +1,9 @@
+.parentDiv{
+    min-height: 100vh;
+}
+.arrow{
+    width: 30px;
+}
 .image{
     display: block;
     margin-left: auto;
@@ -13,16 +19,20 @@
     color: #9C9C9C;
   }
 
+.btn-light{
+    color:#3D199B;
+}
+
 .description2, .description3{
     font-weight: 200;
     color: #525252;
 }
-@media (max-width: 575.98px) {
+@media (max-width: 600px) {
     .text{
         margin-top: 5rem;
     }
     .child{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     .container{
         padding: 1rem;
@@ -80,16 +90,16 @@
         font-size: 1.2rem;
     }
     .page1{
-        margin: 8rem auto;
+        margin: 4rem auto;
     }
     .page2{
-        margin: 8rem auto;
+        margin: 4rem auto;
     }
     .page3{
-        margin: 12rem auto;
+        margin: 4rem auto;
     }
     .page4{
-        margin: 10rem auto;
+        margin: 4rem auto;
     }
  }
 
@@ -122,13 +132,13 @@
         margin: 4rem auto;
     }
     .page2{
-        margin: 15rem auto;
+        margin: 6rem auto;
     }
     .page3{
-        margin: 15.5rem auto;
+        margin: 6rem auto;
     }
     .page4{
-        margin: 15rem auto;
+        margin: 6rem auto;
     }
  }
 
@@ -158,13 +168,13 @@
         margin: 4rem auto;
     }
     .page2{
-        margin: 12rem auto;
+        margin: 7rem auto;
     }
     .page3{
-        margin: 15.5rem auto;
+        margin: 7rem auto;
     }
     .page4{
-        margin: 14rem auto;
+        margin: 7rem auto 0rem;
     }
  }
 
@@ -197,14 +207,14 @@
         margin: 8rem auto;
     }
     .page3{
-        margin: 14.5rem auto;
+        margin: 8rem auto;
     }
     .page4{
-        margin: 14rem auto;
+        margin: 8rem auto 0rem;
     }
  }
 
- @media screen and (min-width: 575.98px) {
+ @media screen and (min-width: 600px) {
     .desktop {
       display: block;
     }
