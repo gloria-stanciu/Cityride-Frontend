@@ -19,6 +19,7 @@
 .form-check-label {
     text-align:left!important;
 }
+
 @media (max-width: 600px) {
     .descriptionTitle{
         font-size: 1.5rem;

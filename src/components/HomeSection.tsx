@@ -10,7 +10,7 @@ export function PageTwo(){
                     <img src='/images/destination_boy.png' alt="destination boy" className='img-fluid'/>
                 </div>
                 <div className="col-md-6 col-sm-12 mb-xs-5 mb-5 align-self-center">
-                    <div className="text-center description2"><b style={{ color: "#3D199B" }}>Real time </b> tracking for your public transport</div>
+                    <div className="text-center description2"><b style={{ color: "#3D199B" }}>Fast and easy </b> tracking of     your public transport</div>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@ export function PageThree(){
                     <img src='/images/destination_girl.png' alt="destination girl" className='img-fluid'/>
                 </div>
                 <div className="col-md-6 col-sm-12 align-self-center">
-                    <div className="description3 text-center">Make your ride easier and stress free!<br/> See your <b style={{ color: "#3D199B" }}>ride options, stops</b> and  <b style={{ color: "#3D199B" }}>duration</b>.</div>
+                    <div className="description3 text-center"><br/> See your <b style={{ color: "#3D199B" }}>ride options, stops</b> and  <b style={{ color: "#3D199B" }}>duration</b>.</div>
                 </div>
             </div>
         </div>
@@ -37,10 +37,10 @@ export function PageFour(){
         <div className={`page4 container d-flex align-items-center flex-column`}>
             <div className="row">
                 <div className="col-md-6 col-sm-12  mb-sm-5 mb-5">
-                    <img src='/images/payments.png' alt="payments" className='img-fluid'/>
+                    <img src='/images/install.png' alt="install" className='img-fluid'/>
                 </div>
                 <div className="col-md-6 col-sm-12 align-self-center">
-                    <div className="description2 text-center">Online payments for your ride ticket <br/><b style={{ color: "#3D199B" }}> easy, fast </b> and <b style={{ color: "#3D199B" }}>safe</b></div>
+                    <div className="description2 text-center"><br/><b style={{ color: "#3D199B" }}> Fast installing </b> on any <b style={{ color: "#3D199B" }}>device</b></div>
                 </div>
             </div>
         </div>

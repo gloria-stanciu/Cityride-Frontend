@@ -27,7 +27,8 @@ function LogIn(){
                 </div>
             </div>
             <div>
-                <Button className="btn btn-responsive btn-primary purple col-8 col-sm-4 col-md-4 col-lg-3" name='Log in'></Button>
+                <Button className="btn btn-responsive btn-primary purple col-8 col-sm-4 col-md-4 col-lg-3" name='Log in' 
+                onClick={()=>{history.push('/home')}}></Button>
                 <br/>
                 <Button className="btn btn-responsive btn-light white col-8 col-sm-4 col-md-4 col-lg-3 mb-5" name='Create account'></Button>
             </div>

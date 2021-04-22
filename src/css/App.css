@@ -1,4 +1,6 @@
 * {
-    background-color: #F2F4F6;
     font-family: 'Chivo', sans-serif;
 }
+/* *:not(.mapboxgl-ctrl-top-right, .sidebar, svg, path, .mapboxgl-marker, .mapboxgl-marker-anchor-center){
+    background-color: #F2F4F6;
+} */

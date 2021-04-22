@@ -6,6 +6,7 @@ import LogIn from './components/LogIn';
 import CreateAccount from './components/CreateAccount';
 import MobileHome from './components/MobileHome';
 import DesktopHome from './components/DesktopHome';
+import SearchPage from './components/SearchPage';
 
 function checkDevice(){
   const isMobile = window.innerWidth;
@@ -26,6 +27,7 @@ function App() {
             <Route exact path ='/' component = {checkDevice()}/>
             <Route path="/login" component={LogIn} />
             <Route path="/signup" component={CreateAccount} />
+            <Route path="/home" component={SearchPage} />
           </Switch>
         </div>
       </BrowserRouter>
