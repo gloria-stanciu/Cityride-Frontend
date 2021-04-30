@@ -1,6 +1,31 @@
-* {
+html {
     font-family: 'Chivo', sans-serif;
+    /* overflow-x: hidden; */
+    margin: 0;
+    padding: 0;
 }
+
 /* *:not(.mapboxgl-ctrl-top-right, .sidebar, svg, path, .mapboxgl-marker, .mapboxgl-marker-anchor-center){
     background-color: #F2F4F6;
 } */
+
+@media screen and (min-width: 600px) {
+    .desktop-home {
+        display: block;
+    }
+
+    .mobile-home {
+        display: none;
+    }
+
+}
+  
+@media screen and (max-width: 599px) {
+    .desktop-home {
+        display: none;
+    }
+
+    .mobile-home {
+        display: block;
+    }
+}

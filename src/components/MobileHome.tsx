@@ -25,7 +25,7 @@ function MobileHome() {
     return Object.assign(state.comp);
   }
   return (
-    <div className="text-center">
+    <div className="mobile-home text-center">
       {state.comp}
       <div className="fixed-bottom" data-toggle="buttons">
         {buttons.map((object, id) => (

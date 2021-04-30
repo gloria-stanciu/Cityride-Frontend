@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from "react";
+// import { Map } from "maplibre-gl";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import './custom.scss';
-import App from './App';
+import "./custom.scss";
+import App from "./App";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.render(
-    <Router>
+  <Provider store={store}>
+    <React.StrictMode>
+      <Router>
         <App />
-    </Router>,
-    document.getElementById('root'));
+      </Router>
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById("root")
+);

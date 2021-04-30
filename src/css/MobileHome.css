@@ -41,12 +41,3 @@
     transform: translate(-50%, -50%);
   }
 }
-
- @media screen and (min-width: 600px) {
-    .desktop {
-      display: hidden;
-    }
-    .mobile {
-      display: block;
-    }
-  }

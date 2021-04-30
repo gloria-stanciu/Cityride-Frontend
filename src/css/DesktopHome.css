@@ -213,12 +213,3 @@
         margin: 8rem auto 0rem;
     }
  }
-
- @media screen and (min-width: 600px) {
-    .desktop {
-      display: block;
-    }
-    .mobile {
-      display: hidden;
-    }
-  } 

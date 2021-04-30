@@ -3,13 +3,12 @@ import React from "react";
 import "../css/DesktopHome.css";
 import Button from "./Button";
 import HomeSection from "./HomeSection";
-
 import { useHistory } from "react-router-dom";
 
 function DesktopHome() {
   const history = useHistory();
   return (
-    <div className="parentDiv">
+    <div className="desktop-home parentDiv">
       <div className="page1 w-100 h-100">
         <img src="/images/app_name.png" alt="app name" className="image" />
         <div className="text text-center">

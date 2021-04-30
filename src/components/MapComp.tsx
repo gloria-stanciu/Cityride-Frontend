@@ -2,10 +2,13 @@ import React, { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import { Map } from "maplibre-gl";
 import { useState } from "react";
-import {GetAllStops} from '../api/getAllStops'
-import { Stop } from '../api/interfaces'
+import { GetAllStops } from "../api/getAllStops";
+import { Stop } from "../api/interfaces";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 
 import "../css/MapComp.css";
+import { ToggleState } from "../store/filters";
+// import { toggle } from "../actions";
 
 function MapComp() {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -13,36 +16,28 @@ function MapComp() {
   const [lat, setLat] = useState(45.74);
   const [zoom, setZoom] = useState(15);
   const [map, setMap] = useState<Map>();
+  const [markers, setMarkers] = useState<maplibregl.Marker[]>([]);
+
+  const isClicked = useSelector<ToggleState, ToggleState["isClicked"]>(
+    (state) => state.isClicked
+  );
+
+  // const dispatch = useDispatch();
+
+  // const onClickButton = (isClicked: boolean) => {
+  //   dispatch(toggle(isClicked));
+  // };
 
   function loadMap() {
     if (!mapContainer.current) return;
-    setMap(
-      new Map({
-        container: mapContainer.current,
-        style:
-          "https://api.maptiler.com/maps/streets/style.json?key=VLT1LWoAFXVTjShlS5Y4",
-        center: [lng, lat],
-        zoom: zoom,
-        // transformRequest: (url, resourceType)=> {
-        //   if(resourceType === 'Source' && url.startsWith('http://myHost')) {
-        //     return {
-        //      url: url.replace('http', 'https'),
-        //      headers: { 'my-custom-header': true},
-        //      credentials: 'include'  // Include cookies for cross-origin requests
-        //    }
-        //   }
-        // }
-      })
-    )
-  }
-
-  function navigation() {
-    if (!map) return;
+    const map = new Map({
+      container: mapContainer.current,
+      style:
+        "https://api.maptiler.com/maps/streets/style.json?key=VLT1LWoAFXVTjShlS5Y4",
+      center: [lng, lat],
+      zoom: zoom,
+    });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
-  }
-
-  function getUserLocation() {
-    if (!map) return;
     map.addControl(
       new maplibregl.GeolocateControl({
         positionOptions: {
@@ -51,19 +46,35 @@ function MapComp() {
         trackUserLocation: true,
       })
     );
+    setMap(map);
   }
 
-  async function addAllStopsToMap() {
-    const stops:Stop[] = await GetAllStops();
+  function getUserLocation() {
     if (!map) return;
-    stops.map((stop) => {
-      if (!stop.name) return;
-      let popup = new maplibregl.Popup({ offset: 25 }).setText(stop.name);        
-      new maplibregl.Marker()
+  }
+
+  async function addStops() {
+    const stops: Stop[] = await GetAllStops();
+
+    if (!map) return;
+
+    let markers: maplibregl.Marker[] = stops.map((stop) => {
+      let popup = new maplibregl.Popup({ offset: 25 }).setText(stop.name);
+
+      let marker = new maplibregl.Marker()
         .setLngLat([parseFloat(stop.long), parseFloat(stop.lat)])
-        .setPopup(popup)
-        .addTo(map);
-    })
+        .setPopup(popup);
+
+      return marker;
+    });
+
+    setMarkers(markers);
+
+    markers.forEach((marker) => marker.addTo(map));
+  }
+
+  function removeStops() {
+    markers.forEach((marker) => marker.remove());
   }
 
   useEffect(() => {
@@ -71,12 +82,11 @@ function MapComp() {
     if (!map) return;
     return () => map.remove();
   }, []);
-  navigation()
-  getUserLocation();
-  addAllStopsToMap()
-  return (
-    <div className="map" ref={mapContainer}/>
-  );
+
+  useEffect(() => {
+    isClicked ? addStops() : removeStops();
+  }, [isClicked]);
+  return <div className="map" ref={mapContainer} />;
 }
 
 export default MapComp;

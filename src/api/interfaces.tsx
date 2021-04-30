@@ -2,7 +2,7 @@ export interface Stop {
     id: string
     feed_id: string
     code: string | null
-    name: string | null
+    name: string
     desc: string | null
     lat: string
     long: string

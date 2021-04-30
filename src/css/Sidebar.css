@@ -1,98 +1,126 @@
-.popup{
-    margin-left: 2px;
+.sidebar-overlay {
+  width: 100vw;
+  height: 100vh;
+
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1rem;
+  display: flex;
 }
 
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-
-.rounded-rect {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 50px -25px black;
+.sidebar {
+  position: relative;
+  pointer-events: auto;
+  transition: transform 1s;
+  z-index: 10;
+  width: 400px;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 50px -25px black;
 }
 
-.flex-center {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.flex-center.bottom {
-    bottom: 0px;
-}
-
-.flex-center.right {
-    right: 0px;
-}
-
-.sidebar-content {
-    position: absolute;
-    width: 95%;
-    height: 95%;
-    font-size: 32px;
-    color: gray;
+.sidebar-toggle-wrapper {
+  position: absolute;
+  display: flex;
 }
 
 .sidebar-toggle {
-    position: absolute;
-    width: 1.3em;
-    height: 1.3em;
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-}
-
-.sidebar-toggle {
-    position: absolute;
-    width: 1.3em;
-    height: 1.3em;
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-}
-
-.sidebar-toggle.right {
-    left: -1.7em;
-}
-
-.sidebar-toggle.bottom {
-    top: -1.7em;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
 }
 
 .sidebar-toggle:hover {
-    color: #0aa1cf;
-    cursor: pointer;
+  color: white;
+  background-color: #f79c78;
+  cursor: pointer;
 }
- 
-.sidebar.right {
-    right: 0;
-    transition: transform 1s;
-    z-index: 1;
-    width: 350px;
+
+@media screen and (min-width: 600px) {
+  .sidebar-overlay {
+    justify-content: flex-end;
+    padding-right: 0;
+  }
+  .sidebar {
+    border-radius: 10px 0 0 10px;
+  }
+  .sidebar-collapsed {
+    transform: translateX(100%);
+  }
+  .sidebar-toggle-wrapper {
     height: 100%;
+    align-items: center;
+    left: -3rem;
+    top: 0;
+  }
 }
-.sidebar.bottom {
-    bottom: 0;
-    transition: transform 1s;
-    z-index: 1;
+
+@media screen and (max-width: 599px) {
+  .sidebar-overlay {
+    align-items: flex-end;
+    padding: 25% 0 0;
+  }
+  .sidebar {
+    border-radius: 10px 10px 0 0;
+  }
+  .sidebar-collapsed {
+    transform: translateY(100%);
+  }
+  .sidebar-toggle-wrapper {
     width: 100%;
-    height: 200px;
+    justify-content: center;
+    top: -3rem;
+    left: 0;
+  }
+  .sidebar-toggle {
+    transform: rotate(90deg);
+  }
 }
 
-/*
-The sidebar styling has them "expanded" by default, we use CSS transforms to push them offscreen
-The toggleSidebar() function removes this class from the element in order to expand it.
-*/
- 
-.right.collapsed {
-    transform: translateX(345px);
+.filter-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.bottom.collapsed {
-    transform: translateY(195px);
+#active,
+#inactive {
+  border-radius: 100px;
+  align-self: flex-start;
+}
+#active-image,
+#inactive-image {
+  border-radius: 50px;
+  padding: 2px;
+  width: 40px;
+}
+
+#inactive-image {
+  background-color: #d2d2d2;
+}
+#active-image {
+  background-color: #f79c78;
+}
+
+.name {
+  font-size: 12px;
+}
+
+.btn {
+  border: none;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.btn:hover {
+  font-weight: 700;
 }

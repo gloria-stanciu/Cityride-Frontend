@@ -1,3 +1,25 @@
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none;
+} */
+
+@media screen and (min-width: 600px) {
+    .desktop-sidebar {
+        display: block;
+    }
+
+    .mobile-sidebar {
+        display: none;
+    }
+
+}
+  
+@media screen and (max-width: 599px) {
+    .desktop-sidebar {
+        display: none;
+    }
+
+    .mobile-sidebar {
+        display: block;
+    }
+
 }
