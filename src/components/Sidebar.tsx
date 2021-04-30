@@ -1,12 +1,14 @@
 import "../css/Sidebar.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { Context } from '../store';
 import { GetRouteTypes } from "../api/getRouteTypes";
 import { useEffect, useState } from "react";
+import { ToggleState, TransportType } from "../store/filters";
 // import { ToggleState } from "../reducer";
 
 export interface DisplayComponent {
   name: string;
+  type: TransportType;
   status: string;
   component: string;
   class: string;
@@ -44,14 +46,13 @@ function Sidebar() {
 
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  const toggle = (isClicked: boolean) => {
-    dispatch({ type: "TOGGLE", payload: isClicked });
+  const setType = (type: TransportType) => {
+    dispatch({ type: "SET_TYPE", payload: type });
   };
 
-  const onClickButton = () => {
-    toggle(clicked);
-    setClicked((prevState) => !prevState);
-  };
+  const selectedType = useSelector<ToggleState, ToggleState["transportType"]>(
+    (state) => state.transportType
+  );
 
   useEffect(() => {
     Filters();
@@ -59,31 +60,24 @@ function Sidebar() {
 
   async function Filters() {
     const types = await GetRouteTypes();
-    let components: DisplayComponent[] = [];
     const transitTypes = types.map((t) => t.type); // genereaza un array de numere
-    const activeButtons = buttons.filter((btn) =>
-      transitTypes.includes(btn.type)
-    ); // si raman numa alea existente
-    const inactiveButtons = buttons.filter(
-      (btn) => !transitTypes.includes(btn.type)
-    );
 
-    activeButtons.forEach((button) => {
-      components.push({
-        name: button.name,
-        status: "active",
-        component: button.active,
-        class: "",
-      });
-    });
-    inactiveButtons.forEach((button) => {
-      components.push({
-        name: button.name,
-        status: "inactive",
-        component: button.inactive,
-        class: "disabled",
-      });
-    });
+    const components: DisplayComponent[] = buttons.map((btn) => ({
+      name: btn.name,
+      type: btn.type,
+      ...(transitTypes.includes(btn.type)
+        ? {
+            class: "active",
+            component: btn.active,
+            status: "active",
+          }
+        : {
+            class: "disabled",
+            component: btn.inactive,
+            status: "inactive",
+          }),
+    }));
+
     if (!filters) setFilters([...components]);
   }
 
@@ -98,22 +92,24 @@ function Sidebar() {
       <aside className={`sidebar ${isCollapsed ? "sidebar-collapsed" : ""}`}>
         <div className="filter-buttons">
           {filters ? (
-            filters.map((buttonFilter, index) => (
+            filters.map((btn, index) => (
               <button
                 key={index}
-                id={buttonFilter.status}
-                className={"btn btn-sm btn-responsive ".concat(
-                  buttonFilter.class
-                )}
-                onClick={onClickButton}
+                id={btn.status}
+                className={[
+                  "btn btn-sm btn-responsive",
+                  btn.class,
+                  btn.type === selectedType ? "filter-selected" : "",
+                ].join(" ")}
+                onClick={() => setType(btn.type)}
               >
                 <img
-                  id={buttonFilter.status + "-image"}
-                  src={buttonFilter.component}
+                  id={btn.status + "-image"}
+                  src={btn.component}
                   alt="arrow"
-                  className="image arrow"
+                  className="filter-image arrow"
                 />
-                <span className="name"> {buttonFilter.name} </span>
+                <span className="name"> {btn.name} </span>
               </button>
             ))
           ) : (

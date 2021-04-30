@@ -1,16 +1,24 @@
-export type Action = { type: "TOGGLE"; payload: boolean };
-
-export interface ToggleState {
-  isClicked: boolean;
+export enum TransportType {
+  Tram = 0,
+  Subway = 1,
+  Train = 2,
+  Bus = 3,
+  None = -1,
 }
 
-export const toggle = (isClicked: boolean): Action => ({
-  type: "TOGGLE",
-  payload: isClicked,
+export type Action = { type: "SET_TYPE"; payload: TransportType };
+
+export interface ToggleState {
+  transportType: TransportType;
+}
+
+export const setType = (type: TransportType): Action => ({
+  type: "SET_TYPE",
+  payload: type,
 });
 
 const initialState = {
-  isClicked: false,
+  transportType: TransportType.None,
 };
 
 export const toggleReducer = (
@@ -18,8 +26,13 @@ export const toggleReducer = (
   action: Action
 ) => {
   switch (action.type) {
-    case "TOGGLE": {
-      return { ...state, isClicked: !state.isClicked };
+    case "SET_TYPE": {
+      const type =
+        state.transportType === action.payload
+          ? TransportType.None
+          : action.payload;
+
+      return { ...state, transportType: type };
     }
     default:
       return state;

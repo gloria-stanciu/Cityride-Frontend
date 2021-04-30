@@ -19,6 +19,7 @@
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 50px -25px black;
+  padding: 1rem;
 }
 
 .sidebar-toggle-wrapper {
@@ -93,12 +94,11 @@
 
 #active,
 #inactive {
-  border-radius: 100px;
+  border-radius: 10px;
   align-self: flex-start;
 }
 #active-image,
 #inactive-image {
-  border-radius: 50px;
   padding: 2px;
   width: 40px;
 }
@@ -116,11 +116,20 @@
 
 .btn {
   border: none;
+  font-weight: 700;
 }
 .btn:focus {
   outline: none;
   box-shadow: none;
 }
 .btn:hover {
-  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.filter-selected {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.filter-image {
+  border-radius: 50%;
 }

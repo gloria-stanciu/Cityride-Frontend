@@ -1,17 +1,17 @@
-import axios from "axios"
+import axios from "axios";
+import { TransportType } from "../store/filters";
 
 interface RouteType {
-    type: number
-  }
-
-const instance = axios.create({
-    baseURL: 'https://cityride.herokuapp.com/api/', 
-  });
-  
-
-async function GetRouteTypes(){
-    const routeTypes = await instance.get('/routes/routeTypes')
-    return routeTypes.data
+  type: number;
 }
 
-export {GetRouteTypes}
+const instance = axios.create({
+  baseURL: "https://cityride.herokuapp.com/api/",
+});
+
+async function GetRouteTypes(): Promise<{ type: TransportType }[]> {
+  const routeTypes = await instance.get("/routes/routeTypes");
+  return routeTypes.data;
+}
+
+export { GetRouteTypes };

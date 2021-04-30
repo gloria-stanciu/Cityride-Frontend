@@ -1,14 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import { Map } from "maplibre-gl";
 import { useState } from "react";
 import { GetAllStops } from "../api/getAllStops";
 import { Stop } from "../api/interfaces";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "../css/MapComp.css";
 import { ToggleState } from "../store/filters";
-// import { toggle } from "../actions";
 
 function MapComp() {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -18,40 +17,9 @@ function MapComp() {
   const [map, setMap] = useState<Map>();
   const [markers, setMarkers] = useState<maplibregl.Marker[]>([]);
 
-  const isClicked = useSelector<ToggleState, ToggleState["isClicked"]>(
-    (state) => state.isClicked
+  const selectedType = useSelector<ToggleState, ToggleState["transportType"]>(
+    (state) => state.transportType
   );
-
-  // const dispatch = useDispatch();
-
-  // const onClickButton = (isClicked: boolean) => {
-  //   dispatch(toggle(isClicked));
-  // };
-
-  function loadMap() {
-    if (!mapContainer.current) return;
-    const map = new Map({
-      container: mapContainer.current,
-      style:
-        "https://api.maptiler.com/maps/streets/style.json?key=VLT1LWoAFXVTjShlS5Y4",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
-    map.addControl(
-      new maplibregl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      })
-    );
-    setMap(map);
-  }
-
-  function getUserLocation() {
-    if (!map) return;
-  }
 
   async function addStops() {
     const stops: Stop[] = await GetAllStops();
@@ -83,9 +51,33 @@ function MapComp() {
     return () => map.remove();
   }, []);
 
+  function loadMap() {
+    if (!mapContainer.current) return;
+    const map = new Map({
+      container: mapContainer.current,
+      style:
+        "https://api.maptiler.com/maps/streets/style.json?key=VLT1LWoAFXVTjShlS5Y4",
+      center: [lng, lat],
+      zoom: zoom,
+    });
+    map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(
+      new maplibregl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
+
+    setMap(map);
+  }
+
   useEffect(() => {
-    isClicked ? addStops() : removeStops();
-  }, [isClicked]);
+    console.log({ selectedType });
+    removeStops();
+    selectedType !== -1 && addStops();
+  }, [selectedType]);
   return <div className="map" ref={mapContainer} />;
 }
 
