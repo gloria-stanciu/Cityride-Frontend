@@ -97,7 +97,7 @@ function Sidebar() {
                 key={index}
                 id={btn.status}
                 className={[
-                  "btn btn-sm btn-responsive",
+                  "btn btn-sm btn-responsive filter-btns",
                   btn.class,
                   btn.type === selectedType ? "filter-selected" : "",
                 ].join(" ")}

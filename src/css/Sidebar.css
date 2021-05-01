@@ -14,7 +14,6 @@
   pointer-events: auto;
   transition: transform 1s;
   z-index: 10;
-  width: 400px;
   height: 100%;
   background: white;
   border-radius: 10px;
@@ -52,6 +51,7 @@
   }
   .sidebar {
     border-radius: 10px 0 0 10px;
+    width: 400px;
   }
   .sidebar-collapsed {
     transform: translateX(100%);
@@ -71,6 +71,7 @@
   }
   .sidebar {
     border-radius: 10px 10px 0 0;
+    width: 100%;
   }
   .sidebar-collapsed {
     transform: translateY(100%);
@@ -114,15 +115,15 @@
   font-size: 12px;
 }
 
-.btn {
+.filter-btns {
   border: none;
   font-weight: 700;
 }
-.btn:focus {
+.filter-btns:focus {
   outline: none;
   box-shadow: none;
 }
-.btn:hover {
+.filter-btns:hover {
   color: var(--color-primary);
 }
 
