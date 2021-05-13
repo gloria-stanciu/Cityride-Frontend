@@ -1,35 +1,5 @@
 import "../css/Sidebar.css";
 import { useDispatch } from "react-redux";
-// import { TransportType } from "../store/filters";
-
-// export interface DisplayComponent {
-//   name: string;
-//   type: TransportType;
-//   status: string;
-//   component: string;
-//   class: string;
-// }
-
-// interface Direction {
-//   shapeId: string;
-//   stops: {
-//     id: string;
-//     name: string;
-//     sequence: number;
-//     routeId: string;
-//     lat: string;
-//     long: string;
-//   }[];
-// }
-
-// export interface Routes {
-//   id: string;
-//   longName: string;
-//   shortName: string;
-//   outbound: Direction;
-//   inbound: Direction;
-//   type: number;
-// }
 
 function DirectionFilter() {
   const dispatch = useDispatch();

@@ -24,10 +24,10 @@ export const changeDirection = (
 ) => {
   switch (action.type) {
     case "SET_DIRECTION": {
-      const type =
-        state.routeDirection === action.payload
-          ? Direction.outbound
-          : action.payload;
+      const type = action.payload;
+      // state.routeDirection === action.payload
+      //   ? Direction.outbound
+      //   : action.payload;
 
       return { ...state, routeDirection: type };
     }
