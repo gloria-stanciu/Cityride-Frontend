@@ -150,10 +150,10 @@
   color: white;
 }
 
-/* .active {
+.default-active-button {
   background-color: #3d199b;
   color: white;
-} */
+}
 
 #active,
 #inactive {

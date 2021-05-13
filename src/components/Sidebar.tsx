@@ -66,15 +66,6 @@ const buttons = [
 
 function Sidebar() {
   const [routes, setRoutes] = useState<Routes[]>([]);
-  const [routeDetails, setRouteDetails] = useState({});
-  const dispatch = useDispatch();
-  const setType = (type: TransportType) => {
-    store.dispatch({ type: "SET_TYPE", payload: type });
-  };
-
-  const direction = useSelector<any, ToggleState["transportType"]>(
-    (state) => state.changeDirection.routeDirection
-  );
 
   const selectedType = useSelector<any, ToggleState["transportType"]>(
     (state) => state.toggleReducer.transportType
@@ -121,6 +112,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-function Context(Context: any): { dispatch: any } {
-  throw new Error("Function not implemented.");
-}

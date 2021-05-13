@@ -1,9 +1,9 @@
 import axios from "axios";
 import { TransportType } from "../store/filters";
 
-interface RouteType {
-  type: number;
-}
+// interface RouteType {
+//   type: number;
+// }
 
 const instance = axios.create({
   baseURL: "https://cityride.herokuapp.com/api/",

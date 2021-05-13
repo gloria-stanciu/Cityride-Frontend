@@ -1,9 +1,9 @@
 import "../css/Sidebar.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ToggleState, TransportType } from "../store/filters";
 import { GetAllStops } from "../api/filtersAPI";
-import store from "../store";
+import { Direction } from "../store/direction";
 
 export interface DisplayComponent {
   name: string;
@@ -13,7 +13,7 @@ export interface DisplayComponent {
   class: string;
 }
 
-interface Direction {
+interface RouteDirection {
   shapeId: string;
   stops: {
     id: string;
@@ -29,32 +29,22 @@ export interface Routes {
   id: string;
   longName: string;
   shortName: string;
-  outbound: Direction;
-  inbound: Direction;
+  outbound: RouteDirection;
+  inbound: RouteDirection;
   type: number;
 }
 
 function DisplayRoutes() {
   const [routes, setRoutes] = useState<Routes[]>([]);
   const [routeDetails, setRouteDetails] = useState({});
-  const dispatch = useDispatch();
-  const setType = (type: TransportType) => {
-    store.dispatch({ type: "SET_TYPE", payload: type });
-  };
 
-  const direction = useSelector<any, ToggleState["transportType"]>(
+  const direction = useSelector<any, Direction>(
     (state) => state.changeDirection.routeDirection
   );
 
   const selectedType = useSelector<any, ToggleState["transportType"]>(
     (state) => state.toggleReducer.transportType
   );
-
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  function ToggleSidebar() {
-    setIsCollapsed(!isCollapsed);
-  }
 
   async function ShowRoutes() {
     if (selectedType !== -1) {
@@ -70,48 +60,53 @@ function DisplayRoutes() {
   }, [selectedType]);
 
   return (
-    <div className="display-routes">
-      {routes ? (
-        routes.map((route, index) => (
-          <div
-            key={index}
-            className="route-container btn"
-            onClick={() => {
-              setRouteDetails(route);
-              console.log(routeDetails);
-            }}
-          >
-            <div className="route-box col-6">
-              <span className="route-card">{route.shortName}</span>
-            </div>
-            <div className="col-10">
-              <span className="ruta">
-                De la &nbsp;
-                <strong>
-                  {" "}
-                  {direction != undefined ? route[direction].stops[0].name : ""}
-                </strong>
-              </span>
-              <span className="ruta ">
-                La &nbsp;
-                <strong>
-                  {" "}
-                  {direction != undefined
-                    ? route[direction].stops.reverse()[0].name
-                    : ""}
-                </strong>
-              </span>
-            </div>
-          </div>
-        ))
+    <div>
+      {selectedType != -1 && direction ? (
+        <div className="display-routes">
+          {routes ? (
+            routes.map((route, index) => (
+              <div
+                key={index}
+                className="route-container btn"
+                onClick={() => {
+                  setRouteDetails(route);
+                  console.log(routeDetails);
+                }}
+              >
+                <div className="route-box col-6">
+                  <span className="route-card">{route.shortName}</span>
+                </div>
+                <div className="col-10">
+                  <span className="ruta">
+                    De la &nbsp;
+                    <strong>
+                      {" "}
+                      {direction != undefined
+                        ? route[direction].stops[0].name
+                        : ""}
+                    </strong>
+                  </span>
+                  <span className="ruta ">
+                    La &nbsp;
+                    <strong>
+                      {" "}
+                      {direction != undefined
+                        ? route[direction].stops.reverse()[0].name
+                        : ""}
+                    </strong>
+                  </span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Routes are loading</p>
+          )}
+        </div>
       ) : (
-        <p>Routes are loading</p>
+        <p></p>
       )}
     </div>
   );
 }
 
 export default DisplayRoutes;
-function Context(Context: any): { dispatch: any } {
-  throw new Error("Function not implemented.");
-}
