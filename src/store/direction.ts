@@ -1,4 +1,5 @@
 export enum Direction {
+  default = "outbound",
   outbound = "outbound",
   inbound = "inbound",
 }
@@ -15,7 +16,7 @@ export const setType = (type: Direction): Action => ({
 });
 
 const initialState = {
-  routeDirection: Direction.outbound,
+  routeDirection: Direction.default,
 };
 
 export const changeDirection = (
