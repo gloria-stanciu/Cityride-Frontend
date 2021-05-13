@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 async function GetRouteTypes(): Promise<{ type: TransportType }[]> {
-  const routeTypes = await instance.get("/routes/routeTypes");
+  const routeTypes = await instance.get("/routes/types");
   return routeTypes.data;
 }
 

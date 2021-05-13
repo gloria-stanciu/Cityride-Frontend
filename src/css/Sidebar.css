@@ -9,7 +9,12 @@
   display: flex;
 }
 
+.btn-responsive {
+  margin: 0.5rem 0;
+}
+
 .sidebar {
+  /* overflow: auto; */
   position: relative;
   pointer-events: auto;
   transition: transform 1s;
@@ -18,7 +23,7 @@
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 50px -25px black;
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 }
 
 .sidebar-toggle-wrapper {
@@ -42,6 +47,40 @@
   color: white;
   background-color: #f79c78;
   cursor: pointer;
+}
+
+.display-routes {
+  display: flex;
+  flex-direction: column;
+}
+.route-container {
+  display: flex;
+  background-color: #f2f4f6;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+.ruta {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  margin: 0.5rem;
+}
+.route-box {
+  display: flex;
+  margin: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 30px;
+  background-color: #8f97e0;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+.route-card {
+  color: white;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 @media screen and (min-width: 600px) {
@@ -91,7 +130,30 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
+
+.filter-routes-container {
+  display: flex;
+  align-items: center;
+}
+.filter-routes-btns {
+  background-color: #f2f4f6;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+}
+
+.filter-routes-btns:focus {
+  background-color: #3d199b;
+  color: white;
+}
+
+/* .active {
+  background-color: #3d199b;
+  color: white;
+} */
 
 #active,
 #inactive {
@@ -118,6 +180,8 @@
 .filter-btns {
   border: none;
   font-weight: 700;
+  position: sticky;
+  top: 0;
 }
 .filter-btns:focus {
   outline: none;

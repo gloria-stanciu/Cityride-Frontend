@@ -10,6 +10,7 @@ import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
+    {console.log(store.getState().toggleReducer)}
     <React.StrictMode>
       <Router>
         <App />

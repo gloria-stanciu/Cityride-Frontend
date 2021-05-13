@@ -6,7 +6,6 @@ import { GetAllStops } from "../api/filtersAPI";
 import FilterButtons from "./FilterButtons";
 import DirectionFilter from "./DirectionFilter";
 import store from "../store";
-import DisplayRoutes from "./DisplayRoutes";
 
 export interface DisplayComponent {
   name: string;
@@ -64,7 +63,7 @@ const buttons = [
   },
 ];
 
-function Sidebar() {
+function DisplayRoutes() {
   const [routes, setRoutes] = useState<Routes[]>([]);
   const [routeDetails, setRouteDetails] = useState({});
   const dispatch = useDispatch();
@@ -100,27 +99,48 @@ function Sidebar() {
   }, [selectedType]);
 
   return (
-    <div className="sidebar-overlay">
-      <aside className={`sidebar ${isCollapsed ? "sidebar-collapsed" : ""}`}>
-        <FilterButtons />
-        <DirectionFilter />
-        <DisplayRoutes />
-        <div className="sidebar-toggle-wrapper">
-          <button className="sidebar-toggle" onClick={() => ToggleSidebar()}>
-            <svg style={{ width: 24, height: 24 }} viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
-              />
-            </svg>
-          </button>
-        </div>
-      </aside>
+    <div className="display-routes">
+      {routes ? (
+        routes.map((route, index) => (
+          <div
+            key={index}
+            className="route-container btn"
+            onClick={() => {
+              setRouteDetails(route);
+              console.log(routeDetails);
+            }}
+          >
+            <div className="route-box col-6">
+              <span className="route-card">{route.shortName}</span>
+            </div>
+            <div className="col-10">
+              <span className="ruta">
+                De la &nbsp;
+                <strong>
+                  {" "}
+                  {direction != undefined ? route[direction].stops[0].name : ""}
+                </strong>
+              </span>
+              <span className="ruta ">
+                La &nbsp;
+                <strong>
+                  {" "}
+                  {direction != undefined
+                    ? route[direction].stops.reverse()[0].name
+                    : ""}
+                </strong>
+              </span>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>Routes are loading</p>
+      )}
     </div>
   );
 }
 
-export default Sidebar;
+export default DisplayRoutes;
 function Context(Context: any): { dispatch: any } {
   throw new Error("Function not implemented.");
 }

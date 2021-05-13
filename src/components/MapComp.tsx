@@ -73,11 +73,11 @@ function MapComp() {
     setMap(map);
   }
 
-  useEffect(() => {
-    console.log({ selectedType });
-    removeStops();
-    selectedType !== -1 && addStops();
-  }, [selectedType]);
+  // useEffect(() => {
+  //   console.log({ selectedType });
+  //   removeStops();
+  //   selectedType !== -1 && addStops();
+  // }, [selectedType]);
   return <div className="map" ref={mapContainer} />;
 }
 
