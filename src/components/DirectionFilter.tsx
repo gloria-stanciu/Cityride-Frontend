@@ -1,10 +1,11 @@
 import "../css/Sidebar.css";
 import { useDispatch } from "react-redux";
+import { Direction } from "../store/direction";
 
 function DirectionFilter() {
   const dispatch = useDispatch();
 
-  const setDirection = (type: String) => {
+  const setDirection = (type: Direction) => {
     dispatch({ type: "SET_DIRECTION", payload: type });
   };
 
@@ -15,9 +16,7 @@ function DirectionFilter() {
     >
       <button
         className="btn filter-routes-btns"
-        onClick={() => {
-          setDirection("outbound");
-        }} //outbound = 0
+        onClick={() => setDirection(Direction.outbound)} //outbound = 0
         name="options"
         id="option1"
       >
@@ -25,7 +24,7 @@ function DirectionFilter() {
       </button>
       <button
         className="btn filter-routes-btns"
-        onClick={() => setDirection("inbound")} //inbound = 1
+        onClick={() => setDirection(Direction.inbound)} //inbound = 1
         name="options"
         id="option2"
       >
