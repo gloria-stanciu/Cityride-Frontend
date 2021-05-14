@@ -1,9 +1,10 @@
 import "../css/Sidebar.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ToggleState, TransportType } from "../store/filters";
 import { GetAllStops } from "../api/filtersAPI";
 import { Direction } from "../store/direction";
+import { routeDetailsState } from "../store/routeDetails";
 
 export interface DisplayComponent {
   name: string;
@@ -36,7 +37,16 @@ export interface Routes {
 
 function DisplayRoutes() {
   const [routes, setRoutes] = useState<Routes[]>([]);
-  const [routeDetails, setRouteDetails] = useState({});
+  // const [routeDetails, setRouteDetails] = useState({});
+  const dispatch = useDispatch();
+
+  const routeDetails = useSelector<any, routeDetailsState>(
+    (state) => state.routeDetails.isVisible
+  );
+
+  const setRouteDetails = (type: routeDetailsState) => {
+    dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });
+  };
 
   const direction = useSelector<any, Direction>(
     (state) => state.changeDirection.routeDirection
@@ -61,50 +71,52 @@ function DisplayRoutes() {
 
   return (
     <div>
-      {selectedType != -1 && direction ? (
-        <div className="display-routes">
-          {routes ? (
-            routes.map((route, index) => (
-              <div
-                key={index}
-                className="route-container btn"
-                onClick={() => {
-                  setRouteDetails(route);
-                  console.log(routeDetails);
-                }}
-              >
-                <div className="route-box col-6">
-                  <span className="route-card">{route.shortName}</span>
-                </div>
-                <div className="col-10">
-                  <span className="ruta">
-                    De la &nbsp;
-                    <strong>
-                      {" "}
-                      {direction != undefined
-                        ? route[direction].stops[0].name
-                        : ""}
-                    </strong>
-                  </span>
-                  <span className="ruta ">
-                    La &nbsp;
-                    <strong>
-                      {" "}
-                      {direction != undefined
-                        ? route[direction].stops.reverse()[0].name
-                        : ""}
-                    </strong>
-                  </span>
-                </div>
+      <div className="display-routes">
+        {routes ? (
+          routes.map((route, index) => (
+            <div
+              key={index}
+              className="route-container btn"
+              onClick={() => {
+                setRouteDetails({
+                  isVisible: true,
+                  routeId: route.id,
+                  direction: direction === "outbound" ? 0 : 1,
+                });
+                console.log(routeDetails);
+              }}
+            >
+              <div className="route-box col-6">
+                <span className="route-card">{route.shortName}</span>
               </div>
-            ))
-          ) : (
-            <p>Routes are loading</p>
-          )}
-        </div>
-      ) : (
-        <p></p>
-      )}
+              <div className="col-10">
+                <span className="ruta">
+                  De la &nbsp;
+                  <strong>
+                    {direction != undefined
+                      ? route[direction].stops[0].name
+                      : ""}
+                  </strong>
+                </span>
+                <span className="ruta">
+                  La &nbsp;
+                  <strong>
+                    {direction != undefined
+                      ? route[direction].stops.reverse()[0].name
+                      : ""}
+                  </strong>
+                </span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only"></span>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

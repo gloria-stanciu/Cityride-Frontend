@@ -9,10 +9,6 @@
   display: flex;
 }
 
-.btn-responsive {
-  margin: 0.5rem 0;
-}
-
 .sidebar {
   /* overflow: auto; */
   position: relative;
@@ -23,7 +19,6 @@
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 50px -25px black;
-  padding: 0 1rem 1rem;
 }
 
 .sidebar-toggle-wrapper {
@@ -47,6 +42,13 @@
   color: white;
   background-color: #f79c78;
   cursor: pointer;
+}
+
+.sidebar-content {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem;
+  padding-top: 0;
 }
 
 .display-routes {
@@ -126,13 +128,18 @@
   }
 }
 
+.sidebar-header {
+  padding-top: 1rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+}
+
 .filter-buttons {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  position: sticky;
-  top: 0;
-  background-color: white;
 }
 
 .filter-routes-container {

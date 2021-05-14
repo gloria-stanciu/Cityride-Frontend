@@ -30,7 +30,7 @@ function DirectionFilter() {
               "btn filter-routes-btns",
               direction === Direction.outbound ? "default-active-button" : "",
             ].join(" ")}
-            onClick={() => setDirection(Direction.outbound)} //outbound = 0
+            onClick={() => setDirection(Direction.outbound)}
             name="options"
             id="option1"
           >
@@ -41,7 +41,7 @@ function DirectionFilter() {
               "btn filter-routes-btns",
               direction === Direction.inbound ? "default-active-button" : "",
             ].join(" ")}
-            onClick={() => setDirection(Direction.inbound)} //inbound = 1
+            onClick={() => setDirection(Direction.inbound)}
             name="options"
             id="option2"
           >
@@ -49,7 +49,7 @@ function DirectionFilter() {
           </button>
         </div>
       ) : (
-        <p></p>
+        <></>
       )}
     </div>
   );

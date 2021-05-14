@@ -7,6 +7,8 @@ import FilterButtons from "./FilterButtons";
 import DirectionFilter from "./DirectionFilter";
 import store from "../store";
 import DisplayRoutes from "./DisplayRoutes";
+import RouteStations from "./RouteStations";
+import { routeDetailsState } from "../store/routeDetails";
 
 export interface DisplayComponent {
   name: string;
@@ -71,6 +73,10 @@ function Sidebar() {
     (state) => state.toggleReducer.transportType
   );
 
+  const routeDetails = useSelector<any, routeDetailsState>(
+    (state) => state.routeDetails.isVisible
+  );
+
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   function ToggleSidebar() {
@@ -93,11 +99,21 @@ function Sidebar() {
   return (
     <div className="sidebar-overlay">
       <aside className={`sidebar ${isCollapsed ? "sidebar-collapsed" : ""}`}>
-        <FilterButtons />
-        <DirectionFilter />
-        <DisplayRoutes />
+        <div className="sidebar-content">
+          {routeDetails.isVisible ? (
+            <RouteStations />
+          ) : (
+            <>
+              <div className="sidebar-header">
+                <FilterButtons />
+                <DirectionFilter />
+              </div>
+              <DisplayRoutes />
+            </>
+          )}
+        </div>
         <div className="sidebar-toggle-wrapper">
-          <button className="sidebar-toggle" onClick={() => ToggleSidebar()}>
+          <button className="sidebar-toggle" onClick={ToggleSidebar}>
             <svg style={{ width: 24, height: 24 }} viewBox="0 0 24 24">
               <path
                 fill="currentColor"

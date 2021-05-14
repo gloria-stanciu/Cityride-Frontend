@@ -1,10 +1,12 @@
 import { combineReducers, createStore } from "redux";
 import { toggleReducer } from "./filters";
 import { changeDirection } from "./direction";
-
+import { routeDetails } from "./routeDetails";
 // rootReducer = combineReducers({ toggleReducer, changeDirection });
 
-const store = createStore(combineReducers({ toggleReducer, changeDirection }));
+const store = createStore(
+  combineReducers({ toggleReducer, changeDirection, routeDetails })
+);
 
 store.subscribe(() => {
   console.log("Store updated", store.getState());
