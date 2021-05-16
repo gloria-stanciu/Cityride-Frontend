@@ -58,9 +58,9 @@ function DisplayRoutes() {
 
   async function ShowRoutes() {
     if (selectedType !== -1) {
-      setRoutes([]);
+      // setRoutes([]);
       const getRoutes = await GetAllStops(selectedType);
-      console.log(getRoutes);
+      // console.log(getRoutes);
       setRoutes(getRoutes);
     }
   }
@@ -70,53 +70,48 @@ function DisplayRoutes() {
   }, [selectedType]);
 
   return (
-    <div>
-      <div className="display-routes">
-        {routes ? (
-          routes.map((route, index) => (
-            <div
-              key={index}
-              className="route-container btn"
-              onClick={() => {
-                setRouteDetails({
-                  isVisible: true,
-                  routeId: route.id,
-                  direction: direction === "outbound" ? 0 : 1,
-                });
-                console.log(routeDetails);
-              }}
-            >
-              <div className="route-box col-6">
-                <span className="route-card">{route.shortName}</span>
-              </div>
-              <div className="col-10">
-                <span className="ruta">
-                  De la &nbsp;
-                  <strong>
-                    {direction != undefined
-                      ? route[direction].stops[0].name
-                      : ""}
-                  </strong>
-                </span>
-                <span className="ruta">
-                  La &nbsp;
-                  <strong>
-                    {direction != undefined
-                      ? route[direction].stops.reverse()[0].name
-                      : ""}
-                  </strong>
-                </span>
-              </div>
+    <div className="display-routes">
+      {routes ? (
+        routes.map((route, index) => (
+          <div
+            key={index}
+            className="route-container btn"
+            onClick={() => {
+              setRouteDetails({
+                isVisible: true,
+                routeId: route.id,
+                direction: direction === "outbound" ? 0 : 1,
+              });
+            }}
+          >
+            <div className="route-box col-6">
+              <span className="route-card">{route.shortName}</span>
             </div>
-          ))
-        ) : (
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="sr-only"></span>
+            <div className="col-10">
+              <span className="ruta">
+                De la &nbsp;
+                <strong>
+                  {direction != undefined ? route[direction].stops[0].name : ""}
+                </strong>
+              </span>
+              <span className="ruta">
+                La &nbsp;
+                <strong>
+                  {direction != undefined
+                    ? route[direction].stops.reverse()[0].name
+                    : ""}
+                </strong>
+              </span>
             </div>
           </div>
-        )}
-      </div>
+        ))
+      ) : (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only"></span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

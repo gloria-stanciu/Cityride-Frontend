@@ -73,8 +73,8 @@ function Sidebar() {
     (state) => state.toggleReducer.transportType
   );
 
-  const routeDetails = useSelector<any, routeDetailsState>(
-    (state) => state.routeDetails.isVisible
+  const selectedRoute = useSelector<any, routeDetailsState>(
+    (state) => state.routeDetails
   );
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -100,7 +100,7 @@ function Sidebar() {
     <div className="sidebar-overlay">
       <aside className={`sidebar ${isCollapsed ? "sidebar-collapsed" : ""}`}>
         <div className="sidebar-content">
-          {routeDetails.isVisible ? (
+          {selectedRoute.isVisible ? (
             <RouteStations />
           ) : (
             <>
@@ -108,6 +108,7 @@ function Sidebar() {
                 <FilterButtons />
                 <DirectionFilter />
               </div>
+
               <DisplayRoutes />
             </>
           )}

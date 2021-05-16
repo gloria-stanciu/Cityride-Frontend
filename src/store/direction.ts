@@ -26,7 +26,7 @@ export const changeDirection = (
     case "SET_DIRECTION": {
       const type = action.payload;
 
-      return { ...state, routeDirection: type };
+      return type;
     }
     default:
       return state;

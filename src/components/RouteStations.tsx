@@ -6,7 +6,7 @@ function RouteStations() {
   const dispatch = useDispatch();
 
   const routeDetails = useSelector<any, routeDetailsState>(
-    (state) => state.routeDetails.isVisible
+    (state) => state.routeDetails
   );
   const setRouteDetails = (type: routeDetailsState) => {
     dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });

@@ -6,10 +6,10 @@ export interface routeDetailsState {
   direction: number;
 }
 
-export const setType = (type): Action => ({
-  type: "SHOW_ROUTE_DETAILS",
-  payload: type,
-});
+// export const selectRoute = (type): Action => ({
+//   type: "SHOW_ROUTE_DETAILS",
+//   payload: type,
+// });
 
 const initialState = {
   isVisible: false,
@@ -25,7 +25,7 @@ export const routeDetails = (
     case "SHOW_ROUTE_DETAILS": {
       const type = action.payload;
 
-      return { ...state, routeDetailsState: type };
+      return type;
     }
     default:
       return state;
