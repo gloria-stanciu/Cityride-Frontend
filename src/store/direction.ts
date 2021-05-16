@@ -5,8 +5,8 @@ export enum Direction {
 
 export type Action = { type: "SET_DIRECTION"; payload: Direction };
 
-export interface ToggleState {
-  routeDirection: Direction;
+export interface DirectionState {
+  direction: Direction;
 }
 
 export const setType = (type: Direction): Action => ({
@@ -15,18 +15,19 @@ export const setType = (type: Direction): Action => ({
 });
 
 const initialState = {
-  routeDirection: Direction.outbound,
+  direction: Direction.outbound,
 };
 
 export const changeDirection = (
-  state: ToggleState = initialState,
+  state: DirectionState = initialState,
   action: Action
 ) => {
   switch (action.type) {
     case "SET_DIRECTION": {
-      const type = action.payload;
+      const direction = action.payload;
+      console.log(state);
 
-      return { routeDirection: type };
+      return { direction: direction };
     }
     default:
       return state;
