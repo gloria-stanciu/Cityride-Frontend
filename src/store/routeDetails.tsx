@@ -1,9 +1,12 @@
 export type Action = { type: "SHOW_ROUTE_DETAILS"; payload: routeDetailsState };
 
 export interface routeDetailsState {
-  isVisible: boolean;
+  // isVisible: boolean;
   routeId: string;
-  direction: number;
+  routeName: string;
+  from: string;
+  to: string;
+  // direction: number;
 }
 
 // export const selectRoute = (type): Action => ({
@@ -12,9 +15,10 @@ export interface routeDetailsState {
 // });
 
 const initialState = {
-  isVisible: false,
   routeId: "",
-  direction: 0, // for outbound
+  routeName: "",
+  from: "",
+  to: "",
 };
 
 export const routeDetails = (

@@ -10,7 +10,6 @@
 }
 
 .sidebar {
-  /* overflow: auto; */
   position: relative;
   pointer-events: auto;
   transition: transform 1s;

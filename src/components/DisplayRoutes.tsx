@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ToggleState, TransportType } from "../store/filters";
 import { GetAllStops } from "../api/filtersAPI";
-import { Direction, DirectionState } from "../store/direction";
+import { Direction } from "../store/direction";
 import { routeDetailsState } from "../store/routeDetails";
 
 export interface DisplayComponent {
@@ -35,14 +35,59 @@ export interface Routes {
   type: number;
 }
 
+function RouteItem(props: { route: Routes }) {
+  const direction = useSelector<any, Direction>(
+    (state) => state.changeDirection.direction
+  );
+  const dispatch = useDispatch();
+  const setRouteDetails = (type: routeDetailsState) => {
+    dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });
+  };
+
+  return (
+    <div
+      className={[
+        "route-container btn",
+        props.route.shortName.slice(0, 1) === "S" ? "disabled" : "",
+      ].join(" ")}
+      onClick={() => {
+        setRouteDetails({
+          routeId: props.route.id,
+          routeName: props.route.longName,
+          from: props.route[direction].stops[0].name,
+          to: props.route[direction].stops[
+            props.route[direction].stops.length - 1
+          ].name,
+        });
+      }}
+    >
+      <div className="route-box col-6">
+        <span className="route-card">{props.route.shortName}</span>
+      </div>
+      <div className="col-10">
+        <span className="ruta">
+          From &nbsp;
+          <strong>
+            {direction != undefined ? props.route[direction].stops[0].name : ""}
+          </strong>
+        </span>
+        <span className="ruta">
+          To &nbsp;
+          <strong>
+            {direction != undefined
+              ? props.route[direction].stops[
+                  props.route[direction].stops.length - 1
+                ].name
+              : ""}
+          </strong>
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function DisplayRoutes() {
   const [routes, setRoutes] = useState<Routes[]>([]);
-  // const [routeDetails, setRouteDetails] = useState({});
-  const dispatch = useDispatch();
-
-  const routeDetails = useSelector<any, routeDetailsState>(
-    (state) => state.routeDetails.isVisible
-  );
 
   const selectedType = useSelector<any, ToggleState["transportType"]>(
     (state) => state.toggleReducer.transportType
@@ -50,9 +95,7 @@ function DisplayRoutes() {
 
   async function ShowRoutes() {
     if (selectedType !== -1) {
-      // setRoutes([]);
       const getRoutes = await GetAllStops(selectedType);
-      // console.log(getRoutes);
       setRoutes(getRoutes);
     }
   }
@@ -77,51 +120,3 @@ function DisplayRoutes() {
 }
 
 export default DisplayRoutes;
-
-function RouteItem(props: { route: Routes }) {
-  const direction = useSelector<any, Direction>(
-    (state) => state.changeDirection.direction
-  );
-  const dispatch = useDispatch();
-  const setRouteDetails = (type: routeDetailsState) => {
-    dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });
-  };
-  // useEffect(() => {
-  //   console.log(direction);
-  // }, [direction]);
-
-  return (
-    <div
-      className="route-container btn"
-      onClick={() => {
-        setRouteDetails({
-          isVisible: true,
-          routeId: props.route.id,
-          direction: direction === "outbound" ? 0 : 1,
-        });
-      }}
-    >
-      <div className="route-box col-6">
-        <span className="route-card">{props.route.shortName}</span>
-      </div>
-      <div className="col-10">
-        <span className="ruta">
-          De la &nbsp;
-          <strong>
-            {direction != undefined ? props.route[direction].stops[0].name : ""}
-          </strong>
-        </span>
-        <span className="ruta">
-          La &nbsp;
-          <strong>
-            {direction != undefined
-              ? props.route[direction].stops[
-                  props.route[direction].stops.length - 1
-                ].name
-              : ""}
-          </strong>
-        </span>
-      </div>
-    </div>
-  );
-}

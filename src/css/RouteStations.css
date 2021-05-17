@@ -1,0 +1,64 @@
+.header-box {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  display: flex;
+}
+
+.route-box-name {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: #3d199b;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.route-card-name {
+  color: white;
+  text-align: center;
+  font-weight: 700;
+}
+
+.start-stop-stations-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rotate-arrow {
+  transform: rotate(180deg);
+}
+
+.station-container {
+  display: flex;
+  background-color: #f2f4f6;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+}
+
+.current-time {
+  padding-top: 0.5rem;
+}
+
+.time {
+  font-weight: 600;
+}

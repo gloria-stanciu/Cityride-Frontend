@@ -9,6 +9,7 @@ import store from "../store";
 import DisplayRoutes from "./DisplayRoutes";
 import RouteStations from "./RouteStations";
 import { routeDetailsState } from "../store/routeDetails";
+import { LeftArrow } from "./LeftArrow";
 
 export interface DisplayComponent {
   name: string;
@@ -100,7 +101,7 @@ function Sidebar() {
     <div className="sidebar-overlay">
       <aside className={`sidebar ${isCollapsed ? "sidebar-collapsed" : ""}`}>
         <div className="sidebar-content">
-          {selectedRoute.isVisible ? (
+          {selectedRoute.routeId !== "" ? (
             <RouteStations />
           ) : (
             <>
@@ -115,12 +116,7 @@ function Sidebar() {
         </div>
         <div className="sidebar-toggle-wrapper">
           <button className="sidebar-toggle" onClick={ToggleSidebar}>
-            <svg style={{ width: 24, height: 24 }} viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
-              />
-            </svg>
+            <LeftArrow />
           </button>
         </div>
       </aside>

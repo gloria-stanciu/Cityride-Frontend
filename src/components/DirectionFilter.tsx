@@ -1,6 +1,6 @@
 import "../css/Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Direction, DirectionState } from "../store/direction";
+import { Direction } from "../store/direction";
 import { ToggleState } from "../store/filters";
 
 function DirectionFilter() {
