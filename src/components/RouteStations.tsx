@@ -6,17 +6,11 @@ import { Direction } from "../store/direction";
 import { useEffect, useState } from "react";
 import { Station } from "../api/interfaces";
 import { LeftArrow } from "./LeftArrow";
-import { add, format, formatDistance, formatRelative, toDate } from "date-fns";
+import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 
 function RouteStations() {
   const [timetable, setTimetable] = useState<Station[]>([]);
-  const [currentTime, setCurrentTime] = useState(
-    new Date()
-    // .toLocaleTimeString([], {
-    //   hour: "numeric",
-    //   minute: "numeric",
-    // })
-  );
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const dispatch = useDispatch();
 
@@ -51,12 +45,10 @@ function RouteStations() {
   useEffect(() => {
     routeDetails.routeName !== "" && fetchTimetable();
     const timer = setInterval(() => {
-      // Creates an interval which will update the current data every minute
-      // This will trigger a rerender every component that uses the useDate hook.
       setCurrentTime(new Date());
     }, 60 * 1000);
     return () => {
-      clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+      clearInterval(timer);
     };
   }, []);
 
@@ -65,18 +57,10 @@ function RouteStations() {
       <div className="station-container">
         <div className="station-name">{props.station.name}</div>
         <div className="time-container">
-          <div className="time">Arrives in</div>
-          <div className="time"> {props.station.arrivalTime}</div>
-          {/* <div className="time"> {new Date(currentTime).toISOString()}</div> */}
-          {/* <div className="time"> */}
-          {/* {" "} */}
-          {/* {parseArrivalTime(props.station.arrivalTime).toISOString()} */}
-          {/* </div> */}
           <div className="time">
-            {" "}
-            {formatRelative(
-              parseArrivalTime(props.station.arrivalTime),
-              new Date(currentTime)
+            Arrives in <br />
+            {formatDistanceToNowStrict(
+              parseArrivalTime(props.station.arrivalTime)
             )}
           </div>
         </div>
@@ -97,6 +81,10 @@ function RouteStations() {
                   routeName: "",
                   from: "",
                   to: "",
+                  direction: {
+                    shapeId: "",
+                    stops: [],
+                  },
                 });
               }}
             >

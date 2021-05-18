@@ -1,11 +1,21 @@
 export type Action = { type: "SHOW_ROUTE_DETAILS"; payload: routeDetailsState };
 
+interface StationDetails {
+  name: string;
+  lat: string;
+  long: string;
+}
+interface DirectionDetails {
+  shapeId: string;
+  stops: StationDetails[];
+}
 export interface routeDetailsState {
   // isVisible: boolean;
   routeId: string;
   routeName: string;
   from: string;
   to: string;
+  direction: DirectionDetails;
   // direction: number;
 }
 
@@ -19,6 +29,10 @@ const initialState = {
   routeName: "",
   from: "",
   to: "",
+  direction: {
+    shapeId: "",
+    stops: [],
+  },
 };
 
 export const routeDetails = (

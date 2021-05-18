@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 
 import "../css/MapComp.css";
 import { ToggleState } from "../store/filters";
+import { routeDetailsState } from "../store/routeDetails";
+import { getShapePoints } from "../api/getShapePoints";
 
 function MapComp() {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -21,20 +23,59 @@ function MapComp() {
     (state) => state.transportType
   );
 
+  const routeDetails = useSelector<any, routeDetailsState>(
+    (state) => state.routeDetails
+  );
+
   async function addStops() {
-    const stops: Stop[] = await GetAllStops();
+    const shapePoints: GeoJSON.Position[] = await getShapePoints(
+      routeDetails.direction.shapeId
+    );
+    console.log(shapePoints);
+    if (!map) return;
+    // map.on("sourcedataloading", function () {
+    // map.addSource("route", {
+    //   type: "geojson",
+    //   data: {
+    //     type: "Feature",
+    //     properties: {
+    //       title: "Mapbox DC",
+    //       "marker-symbol": "monument",
+    //     },
+    //     geometry: {
+    //       type: "LineString",
+    //       coordinates: shapePoints,
+    //     },
+    //   },
+    // });
+    // map.addLayer({
+    //   id: "route",
+    //   type: "line",
+    //   source: "route",
+    //   layout: {
+    //     "line-join": "round",
+    //     "line-cap": "round",
+    //   },
+    //   paint: {
+    //     "line-color": "#bbb",
+    //     "line-width": 8,
+    //   },
+    // });
+    // });
 
     if (!map) return;
 
-    let markers: maplibregl.Marker[] = stops.map((stop) => {
-      let popup = new maplibregl.Popup({ offset: 25 }).setText(stop.name);
+    let markers: maplibregl.Marker[] = routeDetails.direction.stops.map(
+      (stop) => {
+        let popup = new maplibregl.Popup({ offset: 25 }).setText(stop.name);
 
-      let marker = new maplibregl.Marker()
-        .setLngLat([parseFloat(stop.long), parseFloat(stop.lat)])
-        .setPopup(popup);
+        let marker = new maplibregl.Marker()
+          .setLngLat([parseFloat(stop.long), parseFloat(stop.lat)])
+          .setPopup(popup);
 
-      return marker;
-    });
+        return marker;
+      }
+    );
 
     setMarkers(markers);
 
@@ -43,6 +84,8 @@ function MapComp() {
 
   function removeStops() {
     markers.forEach((marker) => marker.remove());
+    if (!map) return;
+    map.removeSource("route");
   }
 
   useEffect(() => {
@@ -73,11 +116,11 @@ function MapComp() {
     setMap(map);
   }
 
-  // useEffect(() => {
-  //   console.log({ selectedType });
-  //   removeStops();
-  //   selectedType !== -1 && addStops();
-  // }, [selectedType]);
+  useEffect(() => {
+    // console.log({ selectedType });
+    // removeStops();
+    routeDetails.routeId !== "" ? addStops() : removeStops();
+  }, [routeDetails]);
   return <div className="map" ref={mapContainer} />;
 }
 

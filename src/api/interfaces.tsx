@@ -27,3 +27,8 @@ export interface Station {
   endDate: Date;
   name: string;
 }
+
+export interface Position {
+  lat: string;
+  long: string;
+}

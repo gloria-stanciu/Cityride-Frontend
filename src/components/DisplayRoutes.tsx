@@ -58,6 +58,10 @@ function RouteItem(props: { route: Routes }) {
           to: props.route[direction].stops[
             props.route[direction].stops.length - 1
           ].name,
+          direction: {
+            shapeId: props.route[direction].shapeId,
+            stops: props.route[direction].stops,
+          },
         });
       }}
     >
