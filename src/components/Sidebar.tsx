@@ -78,7 +78,11 @@ function Sidebar() {
     (state) => state.routeDetails
   );
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const isCollapsed = useSelector<any, Boolean>((state) => state.toggleSidebar);
+  const dispatch = useDispatch();
+  const setIsCollapsed = (type: boolean) => {
+    dispatch({ type: "IS_COLLAPSED", payload: type });
+  };
 
   function ToggleSidebar() {
     setIsCollapsed(!isCollapsed);

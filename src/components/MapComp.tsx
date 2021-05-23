@@ -35,10 +35,16 @@ function MapComp() {
     if (!map) return;
 
     let markers: maplibregl.Marker[] = routeDetails.direction.stops.map(
-      (stop) => {
+      (stop, idx, arr) => {
         let popup = new maplibregl.Popup({ offset: 25 }).setText(stop.name);
 
-        let marker = new maplibregl.Marker()
+        const isFirst = idx === 0;
+        const isLast = idx === arr.length - 1;
+
+        const color = isLast ? "#F79C78" : "#9C9C9C";
+        const scale = isFirst || isLast ? 1 : 0.75;
+
+        let marker = new maplibregl.Marker({ color, scale })
           .setLngLat([parseFloat(stop.long), parseFloat(stop.lat)])
           .setPopup(popup);
 
@@ -50,6 +56,18 @@ function MapComp() {
 
     markers.forEach((marker) => marker.addTo(map));
     showRoute(shapePoints.map((p) => p.reverse()));
+
+    const bounds = new maplibregl.LngLatBounds([
+      new maplibregl.LngLat(shapePoints[0][0], shapePoints[0][1]),
+      new maplibregl.LngLat(
+        shapePoints[shapePoints.length - 1][0],
+        shapePoints[shapePoints.length - 1][1]
+      ),
+    ]);
+
+    map.fitBounds(bounds, {
+      padding: { left: 200, top: 200, bottom: 200, right: 450 },
+    });
   }
 
   function removeStops() {
@@ -134,8 +152,6 @@ function MapComp() {
   }, [map]);
 
   useEffect(() => {
-    // console.log({ selectedType });
-    // removeStops();
     routeDetails.routeId !== "" ? addStops() : removeStops();
   }, [routeDetails]);
   return <div className="map" ref={mapContainer} />;
