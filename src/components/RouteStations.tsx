@@ -21,6 +21,10 @@ function RouteStations() {
     dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });
   };
 
+  const setCurrentStation = (type: object) => {
+    dispatch({ type: "FLY_TO", payload: type });
+  };
+
   const direction = useSelector<any, Direction>(
     (state) => state.changeDirection.direction
   );
@@ -54,7 +58,15 @@ function RouteStations() {
 
   function Station(props: { station: Station }) {
     return (
-      <div className="station-container">
+      <div
+        className="station-container btn"
+        onClick={() =>
+          setCurrentStation({
+            lat: props.station.lat,
+            long: props.station.long,
+          })
+        }
+      >
         <div className="station-name">{props.station.name}</div>
         <div className="time-container">
           <div className="time">

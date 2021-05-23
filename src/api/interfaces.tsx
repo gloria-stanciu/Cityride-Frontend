@@ -26,6 +26,8 @@ export interface Station {
   startDate: Date;
   endDate: Date;
   name: string;
+  lat: string;
+  long: string;
 }
 
 export interface Position {

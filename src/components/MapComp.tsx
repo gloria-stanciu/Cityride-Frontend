@@ -19,8 +19,13 @@ function MapComp() {
   const [map, setMap] = useState<Map>();
   const [markers, setMarkers] = useState<maplibregl.Marker[]>([]);
 
-  const selectedType = useSelector<ToggleState, ToggleState["transportType"]>(
-    (state) => state.transportType
+  interface StationPosition {
+    lat: string;
+    long: string;
+  }
+
+  const currentStation = useSelector<any, StationPosition>(
+    (state) => state.currentStation
   );
 
   const routeDetails = useSelector<any, routeDetailsState>(
@@ -73,7 +78,9 @@ function MapComp() {
   function removeStops() {
     if (!map) return;
 
-    markers.forEach((marker) => marker.remove());
+    markers.forEach((marker) => {
+      marker.remove();
+    });
     showRoute([]);
   }
 
@@ -145,6 +152,20 @@ function MapComp() {
 
     setMap(map);
   }
+
+  useEffect(() => {
+    if (currentStation.lat !== "") {
+      map?.flyTo({
+        center: [
+          parseFloat(currentStation.long),
+          parseFloat(currentStation.lat),
+        ],
+        zoom: 20,
+        pitch: 65,
+        essential: true,
+      });
+    }
+  }, [currentStation]);
 
   useEffect(() => {
     if (!map) return;
