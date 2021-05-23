@@ -3,7 +3,7 @@ import maplibregl from "maplibre-gl";
 import { Map } from "maplibre-gl";
 import { useState } from "react";
 import { GetAllStops } from "../api/getAllStops";
-import { Stop } from "../api/interfaces";
+import { Position, Stop } from "../api/interfaces";
 import { useSelector } from "react-redux";
 
 import "../css/MapComp.css";
@@ -31,37 +31,6 @@ function MapComp() {
     const shapePoints: GeoJSON.Position[] = await getShapePoints(
       routeDetails.direction.shapeId
     );
-    console.log(shapePoints);
-    if (!map) return;
-    // map.on("sourcedataloading", function () {
-    // map.addSource("route", {
-    //   type: "geojson",
-    //   data: {
-    //     type: "Feature",
-    //     properties: {
-    //       title: "Mapbox DC",
-    //       "marker-symbol": "monument",
-    //     },
-    //     geometry: {
-    //       type: "LineString",
-    //       coordinates: shapePoints,
-    //     },
-    //   },
-    // });
-    // map.addLayer({
-    //   id: "route",
-    //   type: "line",
-    //   source: "route",
-    //   layout: {
-    //     "line-join": "round",
-    //     "line-cap": "round",
-    //   },
-    //   paint: {
-    //     "line-color": "#bbb",
-    //     "line-width": 8,
-    //   },
-    // });
-    // });
 
     if (!map) return;
 
@@ -80,12 +49,53 @@ function MapComp() {
     setMarkers(markers);
 
     markers.forEach((marker) => marker.addTo(map));
+    showRoute(shapePoints.map((p) => p.reverse()));
   }
 
   function removeStops() {
-    markers.forEach((marker) => marker.remove());
     if (!map) return;
-    map.removeSource("route");
+
+    markers.forEach((marker) => marker.remove());
+    showRoute([]);
+  }
+
+  function initRoute() {
+    if (!map) return;
+
+    map.addSource("route", {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "LineString",
+          coordinates: [],
+        },
+      },
+    });
+
+    map.addLayer({
+      id: "route_layer",
+      type: "line",
+      source: "route",
+      paint: {
+        "line-color": "#3d199b",
+        "line-width": 8,
+      },
+    });
+  }
+
+  function showRoute(points: GeoJSON.Position[]) {
+    const routeSource = map?.getSource("route") as maplibregl.GeoJSONSource;
+
+    routeSource?.setData({
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "LineString",
+        coordinates: points,
+      },
+    });
   }
 
   useEffect(() => {
@@ -103,7 +113,9 @@ function MapComp() {
       center: [lng, lat],
       zoom: zoom,
     });
+
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+
     map.addControl(
       new maplibregl.GeolocateControl({
         positionOptions: {
@@ -115,6 +127,11 @@ function MapComp() {
 
     setMap(map);
   }
+
+  useEffect(() => {
+    if (!map) return;
+    map.on("load", () => initRoute());
+  }, [map]);
 
   useEffect(() => {
     // console.log({ selectedType });
