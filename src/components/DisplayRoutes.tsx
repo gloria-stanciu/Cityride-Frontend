@@ -46,10 +46,7 @@ function RouteItem(props: { route: Routes }) {
 
   return (
     <div
-      className={[
-        "route-container btn",
-        props.route.shortName.slice(0, 1) === "S" ? "disabled" : "",
-      ].join(" ")}
+      className="route-container btn"
       onClick={() => {
         setRouteDetails({
           routeId: props.route.id,

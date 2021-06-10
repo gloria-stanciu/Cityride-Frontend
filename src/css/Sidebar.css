@@ -84,6 +84,11 @@
   font-weight: 700;
 }
 
+.back-button {
+  margin: 0.5rem 0;
+  padding: 0;
+}
+
 @media screen and (min-width: 600px) {
   .sidebar-overlay {
     justify-content: flex-end;

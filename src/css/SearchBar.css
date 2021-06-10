@@ -1,0 +1,45 @@
+.root {
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  border-radius: 1.5rem;
+  margin: 1rem 0 0 1rem;
+}
+
+.input {
+  border-radius: 1.5rem;
+}
+
+.stops {
+  border: 0 0 1.5rem 1.5rem;
+  margin: 0;
+}
+
+a {
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+  overflow: auto;
+  max-height: 20vh;
+  padding: 0;
+}
+
+.form-control,
+.form-control:focus {
+  border: none;
+}
+
+li {
+  padding: 0;
+  width: auto;
+}
+
+a:hover,
+a:focus {
+  border-radius: 1.5rem;
+}
+/* .stopItem {
+  flex-direction: row;
+} */

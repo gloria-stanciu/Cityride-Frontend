@@ -4,6 +4,10 @@ import { changeDirection } from "./direction";
 import { routeDetails } from "./routeDetails";
 import { toggleSidebar } from "./sidebar";
 import { currentStation } from "./station";
+import { routesFromStop } from "./routesFromStop";
+import { searchBarInput } from "./searchBarInput";
+import { currentStopId } from "./currentStop";
+import { routeTimetable } from "./routeTimetable";
 // rootReducer = combineReducers({ toggleReducer, changeDirection });
 
 const store = createStore(
@@ -13,6 +17,10 @@ const store = createStore(
     routeDetails,
     toggleSidebar,
     currentStation,
+    routesFromStop,
+    searchBarInput,
+    currentStopId,
+    routeTimetable,
   })
 );
 

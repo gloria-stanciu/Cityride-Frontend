@@ -1,6 +1,6 @@
 export type Action = { type: "SHOW_ROUTE_DETAILS"; payload: routeDetailsState };
 
-interface StationDetails {
+export interface StationDetails {
   name: string;
   lat: string;
   long: string;

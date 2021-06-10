@@ -7,12 +7,20 @@ import { useEffect, useState } from "react";
 import { Station } from "../api/interfaces";
 import { LeftArrow } from "./LeftArrow";
 import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
+import { routeTimetable } from "../store/routeTimetable";
 
 function RouteStations() {
-  const [timetable, setTimetable] = useState<Station[]>([]);
+  // const [timetable, setTimetable] = useState<Station[]>([]);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const dispatch = useDispatch();
+
+  const timetable = useSelector<any, Station[]>(
+    (state) => state.routeTimetable
+  );
+  const setTimetable = (type: Station[]) => {
+    dispatch({ type: "SHOW_STOPS_OF_ROUTE", payload: type });
+  };
 
   const routeDetails = useSelector<any, routeDetailsState>(
     (state) => state.routeDetails
@@ -98,6 +106,7 @@ function RouteStations() {
                     stops: [],
                   },
                 });
+                setTimetable([]);
               }}
             >
               <LeftArrow />
@@ -128,15 +137,13 @@ function RouteStations() {
           </strong>
         </div>
       </div>
-      {timetable ? (
+      {timetable.length !== 0 ? (
         timetable.map((station, index) => (
           <Station key={index} station={station} />
         ))
       ) : (
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
-            <span className="sr-only"></span>
-          </div>
+        <div className="text-center">
+          There are no more available rides today for this route.
         </div>
       )}
     </>

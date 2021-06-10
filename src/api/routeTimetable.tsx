@@ -20,7 +20,6 @@ async function getTimetable(
   const timetable = await instance.get(
     `/routes/${routeId}/timetables?time=${dateTime}&direction=${direction}`
   );
-  console.log(newDate);
   return timetable.data;
 }
 

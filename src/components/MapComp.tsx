@@ -3,7 +3,7 @@ import maplibregl from "maplibre-gl";
 import { Map } from "maplibre-gl";
 import { useState } from "react";
 import { GetAllStops } from "../api/getAllStops";
-import { Position, Stop } from "../api/interfaces";
+import { Position, Station, Stop } from "../api/interfaces";
 import { useSelector } from "react-redux";
 
 import "../css/MapComp.css";
@@ -26,6 +26,14 @@ function MapComp() {
 
   const currentStation = useSelector<any, StationPosition>(
     (state) => state.currentStation
+  );
+
+  const timetable = useSelector<any, Station[]>(
+    (state) => state.routeTimetable
+  );
+
+  const currentStopId = useSelector<any, string>(
+    (state) => state.currentStopId
   );
 
   const routeDetails = useSelector<any, routeDetailsState>(
@@ -77,7 +85,6 @@ function MapComp() {
 
   function removeStops() {
     if (!map) return;
-
     markers.forEach((marker) => {
       marker.remove();
     });
@@ -173,7 +180,22 @@ function MapComp() {
   }, [map]);
 
   useEffect(() => {
+    if (currentStopId !== "") {
+      removeStops();
+      console.log("remove stop din currentStopId");
+    }
+  }, [currentStopId]);
+
+  useEffect(() => {
+    if (timetable.length !== 0) {
+      console.log("remove stop din timetable");
+      removeStops();
+    }
+  }, [timetable]);
+
+  useEffect(() => {
     routeDetails.routeId !== "" ? addStops() : removeStops();
+    console.log("remove stop din routeDetails");
   }, [routeDetails]);
   return <div className="map" ref={mapContainer} />;
 }

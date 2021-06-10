@@ -25,18 +25,18 @@ function App() {
 
   return (
     // <Context.Provider value={{ store, dispatch }}>
-      <div className="app">
-        <BrowserRouter>
-          <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={LogIn} />
-              <Route path="/signup" component={CreateAccount} />
-              <Route path="/home" component={SearchPage} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </div>
+    <div className="app">
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            {/* <Route path="/login" component={LogIn} /> */}
+            {/* <Route path="/signup" component={CreateAccount} /> */}
+            <Route path="/home" component={SearchPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </div>
     // </Context.Provider>
   );
 }
