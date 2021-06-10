@@ -12,7 +12,7 @@ const instance = axios.create({
 });
 
 async function getStops(name): Promise<SearchedStops[]> {
-  const timetable = await instance.get(`stops/filter/by/name?name=%${name}%`);
+  const timetable = await instance.get(`stops/filter/by/name?name=${name}`);
   return timetable.data;
 }
 
