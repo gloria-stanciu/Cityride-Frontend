@@ -8,6 +8,7 @@ import { routesFromStop } from "./routesFromStop";
 import { searchBarInput } from "./searchBarInput";
 import { currentStopId } from "./currentStop";
 import { routeTimetable } from "./routeTimetable";
+import { searchedRouteTimetable } from "./searchedRouteTimetable";
 // rootReducer = combineReducers({ toggleReducer, changeDirection });
 
 const store = createStore(
@@ -21,6 +22,7 @@ const store = createStore(
     searchBarInput,
     currentStopId,
     routeTimetable,
+    searchedRouteTimetable,
   })
 );
 

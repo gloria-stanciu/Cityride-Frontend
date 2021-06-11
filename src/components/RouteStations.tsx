@@ -22,6 +22,17 @@ function RouteStations() {
     dispatch({ type: "SHOW_STOPS_OF_ROUTE", payload: type });
   };
 
+  const searchedRouteTimetable = useSelector<any, Station[]>(
+    (state) => state.searchedRouteTimetable
+  );
+  const setSearchedRouteTimetable = (type: Station[]) => {
+    dispatch({ type: "SHOW_STOPS_OF_SEARCHED_ROUTE", payload: type });
+  };
+
+  const changedInput = useSelector<any, string>(
+    (state) => state.searchBarInput
+  );
+
   const routeDetails = useSelector<any, routeDetailsState>(
     (state) => state.routeDetails
   );
@@ -40,7 +51,9 @@ function RouteStations() {
   async function fetchTimetable() {
     const routeDirection = direction === "outbound" ? 0 : 1;
     const response = await getTimetable(routeDetails.routeId, routeDirection);
-    setTimetable(response);
+    changedInput !== ""
+      ? setSearchedRouteTimetable(response)
+      : setTimetable(response);
   }
 
   function parseArrivalTime(arrivalTime: string) {
@@ -106,7 +119,9 @@ function RouteStations() {
                     stops: [],
                   },
                 });
-                setTimetable([]);
+                changedInput !== ""
+                  ? setSearchedRouteTimetable([])
+                  : setTimetable([]);
               }}
             >
               <LeftArrow />
@@ -139,6 +154,10 @@ function RouteStations() {
       </div>
       {timetable.length !== 0 ? (
         timetable.map((station, index) => (
+          <Station key={index} station={station} />
+        ))
+      ) : searchedRouteTimetable.length !== 0 ? (
+        searchedRouteTimetable.map((station, index) => (
           <Station key={index} station={station} />
         ))
       ) : (

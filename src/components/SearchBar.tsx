@@ -57,6 +57,10 @@ function SearchBar() {
     dispatch({ type: "SHOW_STOPS_OF_ROUTE", payload: type });
   };
 
+  const setSearchedRouteTimetable = (type: Station[]) => {
+    dispatch({ type: "SHOW_STOPS_OF_SEARCHED_ROUTE", payload: type });
+  };
+
   async function showSuggestions() {
     const possibleStops = await getStops(changedInput);
     setSearchedStops(possibleStops);
@@ -102,7 +106,7 @@ function SearchBar() {
           placeholder="Search by a station"
         ></input>
       </div>
-      {changedInput !== "" ? (
+      {changedInput !== "" && currentStopId === "" ? (
         <ul className="flex stops">
           {searchedStops.map((stop, index) => (
             <li
@@ -117,7 +121,8 @@ function SearchBar() {
                   to: "",
                   direction: { shapeId: "", stops: [] },
                 });
-                setTimetable([]);
+                setSearchedRouteTimetable([]);
+                setRoutesFromStop([]);
                 if (isCollapsed === true) setIsCollapsed(!isCollapsed);
               }}
             >

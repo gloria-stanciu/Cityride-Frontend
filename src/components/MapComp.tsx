@@ -28,8 +28,8 @@ function MapComp() {
     (state) => state.currentStation
   );
 
-  const timetable = useSelector<any, Station[]>(
-    (state) => state.routeTimetable
+  const searchedRouteTimetable = useSelector<any, Station[]>(
+    (state) => state.searchedRouteTimetable
   );
 
   const currentStopId = useSelector<any, string>(
@@ -187,11 +187,12 @@ function MapComp() {
   }, [currentStopId]);
 
   useEffect(() => {
-    if (timetable.length !== 0) {
+    console.log("eu sunt apelat primul");
+    if (searchedRouteTimetable.length !== 0) {
       console.log("remove stop din timetable");
       removeStops();
     }
-  }, [timetable]);
+  }, [searchedRouteTimetable]);
 
   useEffect(() => {
     routeDetails.routeId !== "" ? addStops() : removeStops();

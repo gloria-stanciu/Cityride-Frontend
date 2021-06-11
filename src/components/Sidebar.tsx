@@ -94,11 +94,18 @@ function Sidebar() {
     dispatch({ type: "IS_COLLAPSED", payload: type });
   };
 
-  const timetable = useSelector<any, Station[]>(
-    (state) => state.routeTimetable
+  // const timetable = useSelector<any, Station[]>(
+  //   (state) => state.routeTimetable
+  // );
+  // const setTimetable = (type: Station[]) => {
+  //   dispatch({ type: "SHOW_STOPS_OF_ROUTE", payload: type });
+  // };
+
+  const searchedRouteTimetable = useSelector<any, Station[]>(
+    (state) => state.searchedRouteTimetable
   );
-  const setTimetable = (type: Station[]) => {
-    dispatch({ type: "SHOW_STOPS_OF_ROUTE", payload: type });
+  const setSearchedRouteTimetable = (type: Station[]) => {
+    dispatch({ type: "SHOW_STOPS_OF_SEARCHED_ROUTE", payload: type });
   };
 
   const routeDetails = useSelector<any, routeDetailsState>(
@@ -145,7 +152,7 @@ function Sidebar() {
     const routeDirection = direction === "outbound" ? 0 : 1;
     if (routeDetails.routeId !== "") {
       const response = await getTimetable(routeDetails.routeId, routeDirection);
-      setTimetable(response);
+      setSearchedRouteTimetable(response);
     }
   }
 
@@ -167,15 +174,6 @@ function Sidebar() {
 
   useEffect(() => {
     fetchTimetable();
-    // const res = timetable.reduce<StationDetails[]>((result, route) => {
-    //   result.push({
-    //     name: route.name,
-    //     lat: route.lat,
-    //     long: route.long,
-    //   });
-    //   return result;
-    // }, []);
-    // setStopInfo(res);
   }, [isClicked]);
 
   useEffect(() => {
@@ -183,35 +181,41 @@ function Sidebar() {
   }, [selectedType]);
 
   useEffect(() => {
-    if (routeDetails.routeId !== "") {
-      console.log("am trecut de primul if");
-      if (timetable !== undefined && timetable.length !== 0) {
-        console.log("am trecut de al doilea if");
-        const res = timetable.reduce<StationDetails[]>((result, route) => {
+    console.log("eu sunt apelat al doilea");
+    // if (routeDetails.routeId !== "") {
+    console.log("am trecut de primul if");
+    if (
+      searchedRouteTimetable !== undefined &&
+      searchedRouteTimetable.length !== 0
+    ) {
+      console.log("am trecut de al doilea if");
+      const res = searchedRouteTimetable.reduce<StationDetails[]>(
+        (result, route) => {
           result.push({
             name: route.name,
             lat: route.lat,
             long: route.long,
           });
           return result;
-        }, []);
-        setRouteDetails({
-          ...routeDetails,
-          from: res[0].name,
-          to: res[res.length - 1].name,
-          direction: {
-            shapeId: routeDetails.direction.shapeId,
-            stops: res,
-          },
-        });
-        // setStopInfo(res);
-      }
+        },
+        []
+      );
+      setRouteDetails({
+        ...routeDetails,
+        from: res[0].name,
+        to: res[res.length - 1].name,
+        direction: {
+          shapeId: routeDetails.direction.shapeId,
+          stops: res,
+        },
+      });
+      // }
     }
-  }, [timetable, isClicked]);
+  }, [searchedRouteTimetable]);
 
   useEffect(() => {
     routesFromStop.length !== 0 && possibleRoutesFromStop() && fetchTimetable();
-    console.log("timetable", timetable);
+    console.log("timetable", searchedRouteTimetable);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60 * 1000);
@@ -252,16 +256,6 @@ function Sidebar() {
                         setRoutesFromStop([]);
                         setChangedInput("");
                         setIsClicked(false);
-                        // setRouteDetails({
-                        //   routeId: "",
-                        //   routeName: "",
-                        //   from: "",
-                        //   to: "",
-                        //   direction: {
-                        //     shapeId: "",
-                        //     stops: [],
-                        //   },
-                        // });
                       }}
                     >
                       <LeftArrow />
@@ -283,18 +277,7 @@ function Sidebar() {
                           key={index}
                           className="btn route-container d-flex justify-content-between flex-row"
                           onClick={() => {
-                            console.log("timetableis", timetable);
-                            // const res = timetable.reduce<StationDetails[]>(
-                            //   (result, route) => {
-                            //     result.push({
-                            //       name: route.name,
-                            //       lat: route.lat,
-                            //       long: route.long,
-                            //     });
-                            //     return result;
-                            //   },
-                            //   []
-                            // );
+                            console.log("timetableis", searchedRouteTimetable);
                             setRouteDetails({
                               routeId: route.routeId,
                               routeName: route.outbound[0].shortName,
@@ -327,19 +310,7 @@ function Sidebar() {
                           key={index + 100}
                           className="btn route-container d-flex justify-content-between flex-row"
                           onClick={() => {
-                            console.log("timetableis", timetable);
-                            // const res = timetable.reduce<StationDetails[]>(
-                            //   (result, route) => {
-                            //     result.push({
-                            //       name: route.name,
-                            //       lat: route.lat,
-                            //       long: route.long,
-                            //     });
-                            //     return result;
-                            //   },
-                            //   []
-                            // );
-
+                            console.log("timetableis", searchedRouteTimetable);
                             setRouteDetails({
                               routeId: route.routeId,
                               routeName: route.inbound[0].shortName,
