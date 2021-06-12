@@ -25,7 +25,6 @@ export const changeDirection = (
   switch (action.type) {
     case "SET_DIRECTION": {
       const direction = action.payload;
-      console.log(state);
 
       return { direction: direction };
     }

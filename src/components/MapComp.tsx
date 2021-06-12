@@ -13,8 +13,8 @@ import { getShapePoints } from "../api/getShapePoints";
 
 function MapComp() {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const [lng, setLng] = useState(21.2087);
-  const [lat, setLat] = useState(45.74);
+  const [lng, setLng] = useState(21.2278269);
+  const [lat, setLat] = useState(45.7570519);
   const [zoom, setZoom] = useState(15);
   const [map, setMap] = useState<Map>();
   const [markers, setMarkers] = useState<maplibregl.Marker[]>([]);
@@ -78,9 +78,15 @@ function MapComp() {
       ),
     ]);
 
-    map.fitBounds(bounds, {
-      padding: { left: 200, top: 200, bottom: 200, right: 450 },
-    });
+    if (window.innerWidth >= 599) {
+      map.fitBounds(bounds, {
+        padding: { left: 200, top: 200, bottom: 200, right: 450 },
+      });
+    } else {
+      map.fitBounds(bounds, {
+        padding: { left: 50, top: 50, bottom: 50, right: 90 },
+      });
+    }
   }
 
   function removeStops() {
@@ -88,7 +94,25 @@ function MapComp() {
     markers.forEach((marker) => {
       marker.remove();
     });
+
     showRoute([]);
+    if (routeDetails.routeId === "") {
+      if (window.innerWidth >= 599) {
+        map.flyTo({
+          center: [parseFloat(lng.toString()), parseFloat(lat.toString())],
+          zoom: 15,
+          pitch: 65,
+          essential: true,
+        });
+      } else {
+        map.flyTo({
+          center: [parseFloat(lng.toString()), parseFloat(lat.toString())],
+          zoom: 15,
+          pitch: 65,
+          essential: true,
+        });
+      }
+    }
   }
 
   function initRoute() {
@@ -182,21 +206,19 @@ function MapComp() {
   useEffect(() => {
     if (currentStopId !== "") {
       removeStops();
-      console.log("remove stop din currentStopId");
     }
   }, [currentStopId]);
 
   useEffect(() => {
-    console.log("eu sunt apelat primul");
-    if (searchedRouteTimetable.length !== 0) {
-      console.log("remove stop din timetable");
-      removeStops();
-    }
+    // if (searchedRouteTimetable.length === 0) {
+    console.log("intru aici searchedRouteTimetable");
+    removeStops();
+    // }
   }, [searchedRouteTimetable]);
 
   useEffect(() => {
+    console.log("intru aici routeDetails");
     routeDetails.routeId !== "" ? addStops() : removeStops();
-    console.log("remove stop din routeDetails");
   }, [routeDetails]);
   return <div className="map" ref={mapContainer} />;
 }

@@ -8,6 +8,7 @@ import { Station } from "../api/interfaces";
 import { LeftArrow } from "./LeftArrow";
 import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 import { routeTimetable } from "../store/routeTimetable";
+import { StopsWithRoutes } from "../store/routesFromStop";
 
 function RouteStations() {
   // const [timetable, setTimetable] = useState<Station[]>([]);
@@ -48,6 +49,16 @@ function RouteStations() {
     (state) => state.changeDirection.direction
   );
 
+  const setRoutesFromStop = (type: StopsWithRoutes[]) => {
+    dispatch({ type: "SHOW_ROUTES_FROM_STOPS", payload: type });
+  };
+
+  const isCollapsed = useSelector<any, Boolean>((state) => state.toggleSidebar);
+
+  const setIsCollapsed = (type: boolean) => {
+    dispatch({ type: "IS_COLLAPSED", payload: type });
+  };
+
   async function fetchTimetable() {
     const routeDirection = direction === "outbound" ? 0 : 1;
     const response = await getTimetable(routeDetails.routeId, routeDirection);
@@ -81,12 +92,13 @@ function RouteStations() {
     return (
       <div
         className="station-container btn"
-        onClick={() =>
+        onClick={() => {
           setCurrentStation({
             lat: props.station.lat,
             long: props.station.long,
-          })
-        }
+          });
+          if (window.innerWidth <= 599) setIsCollapsed(!isCollapsed);
+        }}
       >
         <div className="station-name">{props.station.name}</div>
         <div className="time-container">
@@ -122,6 +134,7 @@ function RouteStations() {
                 changedInput !== ""
                   ? setSearchedRouteTimetable([])
                   : setTimetable([]);
+                // setRoutesFromStop([]);
               }}
             >
               <LeftArrow />

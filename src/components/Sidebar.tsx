@@ -181,41 +181,39 @@ function Sidebar() {
   }, [selectedType]);
 
   useEffect(() => {
-    console.log("eu sunt apelat al doilea");
-    // if (routeDetails.routeId !== "") {
-    console.log("am trecut de primul if");
-    if (
-      searchedRouteTimetable !== undefined &&
-      searchedRouteTimetable.length !== 0
-    ) {
-      console.log("am trecut de al doilea if");
-      const res = searchedRouteTimetable.reduce<StationDetails[]>(
-        (result, route) => {
-          result.push({
-            name: route.name,
-            lat: route.lat,
-            long: route.long,
+    if (routeDetails.routeId !== "") {
+      if (
+        searchedRouteTimetable !== undefined &&
+        searchedRouteTimetable.length !== 0
+      ) {
+        const res = searchedRouteTimetable.reduce<StationDetails[]>(
+          (result, route) => {
+            result.push({
+              name: route.name,
+              lat: route.lat,
+              long: route.long,
+            });
+            return result;
+          },
+          []
+        );
+        if (routeDetails.direction.stops.length === 0) {
+          setRouteDetails({
+            ...routeDetails,
+            from: res[0].name,
+            to: res[res.length - 1].name,
+            direction: {
+              shapeId: routeDetails.direction.shapeId,
+              stops: res,
+            },
           });
-          return result;
-        },
-        []
-      );
-      setRouteDetails({
-        ...routeDetails,
-        from: res[0].name,
-        to: res[res.length - 1].name,
-        direction: {
-          shapeId: routeDetails.direction.shapeId,
-          stops: res,
-        },
-      });
-      // }
+        }
+      }
     }
   }, [searchedRouteTimetable]);
 
   useEffect(() => {
     routesFromStop.length !== 0 && possibleRoutesFromStop() && fetchTimetable();
-    console.log("timetable", searchedRouteTimetable);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60 * 1000);
@@ -254,6 +252,16 @@ function Sidebar() {
                       className="btn back-button"
                       onClick={() => {
                         setRoutesFromStop([]);
+                        setRouteDetails({
+                          routeId: "",
+                          routeName: "",
+                          from: "",
+                          to: "",
+                          direction: {
+                            shapeId: "",
+                            stops: [],
+                          },
+                        });
                         setChangedInput("");
                         setIsClicked(false);
                       }}
@@ -277,17 +285,18 @@ function Sidebar() {
                           key={index}
                           className="btn route-container d-flex justify-content-between flex-row"
                           onClick={() => {
-                            console.log("timetableis", searchedRouteTimetable);
-                            setRouteDetails({
-                              routeId: route.routeId,
-                              routeName: route.outbound[0].shortName,
-                              from: "",
-                              to: "",
-                              direction: {
-                                shapeId: route.outbound[0].shapeId,
-                                stops: [],
-                              },
-                            });
+                            if (routeDetails.routeId === "") {
+                              setRouteDetails({
+                                routeId: route.routeId,
+                                routeName: route.outbound[0].shortName,
+                                from: "",
+                                to: "",
+                                direction: {
+                                  shapeId: route.outbound[0].shapeId,
+                                  stops: [],
+                                },
+                              });
+                            }
                             setIsClicked(true);
                           }}
                         >
@@ -310,7 +319,6 @@ function Sidebar() {
                           key={index + 100}
                           className="btn route-container d-flex justify-content-between flex-row"
                           onClick={() => {
-                            console.log("timetableis", searchedRouteTimetable);
                             setRouteDetails({
                               routeId: route.routeId,
                               routeName: route.inbound[0].shortName,

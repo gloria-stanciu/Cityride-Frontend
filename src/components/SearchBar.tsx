@@ -1,4 +1,3 @@
-import { fromUnixTime } from "date-fns";
 import "../css/SearchBar.css";
 import { getStops } from "../api/getStops";
 import { getPossibleRoutes } from "../api/possibleRoutes";
@@ -16,8 +15,6 @@ interface SearchedStops {
 }
 
 function SearchBar() {
-  // const [changedInput, setChangedInput] = useState("");
-  // const [stopId, setStopId] = useState("");
   const [searchedStops, setSearchedStops] = useState<SearchedStops[]>([]);
 
   const dispatch = useDispatch();
@@ -68,7 +65,6 @@ function SearchBar() {
 
   async function possibleRoutesFromStop() {
     const possibleRoutes = await getPossibleRoutes(currentStopId);
-    console.log("pOSSIBLE ROUTES", possibleRoutes);
     setRoutesFromStop(possibleRoutes);
   }
 
@@ -80,7 +76,6 @@ function SearchBar() {
     if (currentStopId !== "") {
       possibleRoutesFromStop();
     } else {
-      console.log("current stop id e gol");
     }
   }, [currentStopId]);
 

@@ -113,7 +113,6 @@ function FilterButtons() {
             ].join(" ")}
             onClick={() => {
               setType(btn.type);
-              console.log(selectedType);
             }}
           >
             <img

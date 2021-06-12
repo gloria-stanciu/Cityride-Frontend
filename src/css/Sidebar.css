@@ -166,6 +166,11 @@
   color: white;
 }
 
+.next-stop {
+  font-size: small;
+  display: inline;
+}
+
 #active,
 #inactive {
   border-radius: 10px;

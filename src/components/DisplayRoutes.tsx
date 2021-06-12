@@ -39,9 +39,14 @@ function RouteItem(props: { route: Routes }) {
   const direction = useSelector<any, Direction>(
     (state) => state.changeDirection.direction
   );
+  const isCollapsed = useSelector<any, Boolean>((state) => state.toggleSidebar);
   const dispatch = useDispatch();
   const setRouteDetails = (type: routeDetailsState) => {
     dispatch({ type: "SHOW_ROUTE_DETAILS", payload: type });
+  };
+
+  const setIsCollapsed = (type: boolean) => {
+    dispatch({ type: "IS_COLLAPSED", payload: type });
   };
 
   return (
@@ -60,11 +65,14 @@ function RouteItem(props: { route: Routes }) {
             stops: props.route[direction].stops,
           },
         });
+
+        if (window.innerWidth <= 599) setIsCollapsed(!isCollapsed);
       }}
     >
       <div className="route-box col-6">
         <span className="route-card">{props.route.shortName}</span>
       </div>
+
       <div className="col-10">
         <span className="ruta">
           From &nbsp;
