@@ -210,10 +210,10 @@ function MapComp() {
   }, [currentStopId]);
 
   useEffect(() => {
-    // if (searchedRouteTimetable.length === 0) {
-    console.log("intru aici searchedRouteTimetable");
-    removeStops();
-    // }
+    if (searchedRouteTimetable.length === 0) {
+      console.log("intru aici searchedRouteTimetable");
+      removeStops();
+    }
   }, [searchedRouteTimetable]);
 
   useEffect(() => {
